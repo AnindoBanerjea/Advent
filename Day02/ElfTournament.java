@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.*;
 
@@ -12,21 +12,15 @@ public class ElfTournament {
     public ElfTournament(String filename) {
         this.rounds = new ArrayList<MovePair>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+            List<String> lines = Files.readAllLines(Paths.get(filename));
 
-            while (line != null) {
+            for (String line : lines) {
                 Move oppMove = new Move((int)(line.charAt(0)-'A'));
                 int target = (int)(line.charAt(2)-'X'-1);
                 Move myMove = oppMove.predict(target);
                 MovePair currentRound = new MovePair(oppMove, myMove);    
                 this.rounds.add(currentRound);
-
-                // read next line
-                line = reader.readLine();
-
-            }
-            reader.close();
+          }
         } catch (IOException e) {
             e.printStackTrace();
         }

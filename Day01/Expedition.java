@@ -1,6 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Expedition {
@@ -10,21 +10,16 @@ public class Expedition {
         this.elves = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> currentElf = new ArrayList<Integer>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-
-            while (line != null) {
+            List<String> lines = Files.readAllLines(Paths.get(filename));
+            for (String line : lines) {
                 if (line.trim().isEmpty()) {
                     this.elves.add(currentElf);
                     currentElf = new ArrayList<Integer>();
                 } else {
                     currentElf.add(Integer.valueOf(line));
                 }
-                // read next line
-                line = reader.readLine();
             }
             this.elves.add(currentElf);
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
