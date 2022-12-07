@@ -1,6 +1,6 @@
 public class Range {
-    private int lo;
-    private int hi;
+    private final int lo;
+    private final int hi;
     public Range(int l, int h){
         lo = l;
         hi = h;

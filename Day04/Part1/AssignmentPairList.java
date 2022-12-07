@@ -7,20 +7,18 @@ import java.util.*;
 public class AssignmentPairList {
    
     
-    private ArrayList<RangePair> rs;
+    private List<RangePair> rs;
 
     public AssignmentPairList(String filename) {
-        this.rs = new ArrayList<RangePair>();
+        this.rs = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filename));
             for (String line : lines) {
-                String[] l1 = line.split(",");
-                String[] range1 = l1[0].split("-");
-                String[] range2 = l1[1].split("-");
-                RangePair rp = new RangePair(Integer.parseInt(range1[0]),
-                                             Integer.parseInt(range1[1]),
-                                             Integer.parseInt(range2[0]),
-                                             Integer.parseInt(range2[1])); 
+                String[] parts = line.split("[,-]");
+                RangePair rp = new RangePair(Integer.parseInt(parts[0]),
+                                             Integer.parseInt(parts[1]),
+                                             Integer.parseInt(parts[2]),
+                                             Integer.parseInt(parts[3])); 
                 this.rs.add(rp);
             }
         } catch (IOException e) {
@@ -28,7 +26,7 @@ public class AssignmentPairList {
         }
     }
 
-    public ArrayList<RangePair> getRangePairs() {
+    public List<RangePair> getRangePairs() {
         return rs;
     }
 }
