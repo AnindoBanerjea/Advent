@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Plan {
-    private List<Move> p;
+    private final List<Move> p;
 
     public Plan(List<String> lines) {
         p = new ArrayList<>();
