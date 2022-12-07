@@ -7,10 +7,10 @@ import java.util.*;
 public class RucksackList {
    
     
-    private ArrayList<Rucksack> rs;
+    private final List<Rucksack> rs;
 
     public RucksackList(String filename) {
-        this.rs = new ArrayList<Rucksack>();
+        this.rs = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filename));
             for (String line : lines) {
@@ -22,7 +22,7 @@ public class RucksackList {
         }
     }
 
-    public ArrayList<Rucksack> getRucksacks() {
+    public List<Rucksack> getRucksacks() {
         return rs;
     }
 }
