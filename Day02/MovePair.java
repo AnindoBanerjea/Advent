@@ -1,6 +1,7 @@
 public class MovePair {
-    private Move oppMove;
-    private Move myMove;
+    private final Move oppMove;
+    private final Move myMove;
+    
     public MovePair(int n, int m){
         this.oppMove = new Move(n);
         this.myMove = new Move(m);

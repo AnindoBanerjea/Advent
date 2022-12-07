@@ -7,17 +7,22 @@ import java.util.*;
 public class ElfTournament {
    
     
-    private ArrayList<MovePair> rounds;
+    private final List<MovePair> rounds;
 
-    public ElfTournament(String filename) {
-        this.rounds = new ArrayList<MovePair>();
+    public ElfTournament(String filename, int part) {
+        this.rounds = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filename));
 
             for (String line : lines) {
-                Move oppMove = new Move((int)(line.charAt(0)-'A'));
-                int target = (int)(line.charAt(2)-'X'-1);
-                Move myMove = oppMove.predict(target);
+                Move oppMove = new Move(line.charAt(0)-'A');
+                Move myMove;
+                if (part == 1) {
+                    myMove = new Move(line.charAt(2)-'X');
+                } else {
+                    int target = line.charAt(2)-'X'-1;
+                    myMove = oppMove.predict(target);
+                }
                 MovePair currentRound = new MovePair(oppMove, myMove);    
                 this.rounds.add(currentRound);
           }
@@ -26,7 +31,7 @@ public class ElfTournament {
         }
     }
 
-    public ArrayList<MovePair> getRounds() {
+    public List<MovePair> getRounds() {
         return this.rounds;
     }
 

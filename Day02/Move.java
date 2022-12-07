@@ -1,5 +1,5 @@
 public class Move implements Comparable<Move> {
-    private int m;
+    private final int m;
     public Move(int n) {
         m = n;
     }
