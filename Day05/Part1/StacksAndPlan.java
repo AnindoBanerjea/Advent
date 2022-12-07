@@ -1,5 +1,5 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.*;
 
@@ -12,28 +12,16 @@ public class StacksAndPlan {
 
     public StacksAndPlan(String filename) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-            ArrayList<String> lines = new ArrayList<String>();
-            while (!line.trim().isEmpty()) {
-                lines.add(line);
+            List<String> lines = Files.readAllLines(Paths.get(filename));
 
-                // read next line
-                line = reader.readLine();
+            // find the blank line
+            int i;
+            for (i = 0; i < lines.size(); i++) {
+                if ( lines.get(i).trim().isEmpty()) break;
             }
-            stacks = new Stacks(lines);
-            lines = new ArrayList<String>();
-            while (line != null) {
-                if (!line.trim().isEmpty()) {
-                    lines.add(line);
-                }
 
-                // read next line
-                line = reader.readLine();
-            }
-            plan = new Plan(lines);
-
-            reader.close();
+            stacks = new Stacks(lines.subList(0, i));
+            plan = new Plan(lines.subList(i+1, lines.size()));
         } catch (IOException e) {
             e.printStackTrace();
         }

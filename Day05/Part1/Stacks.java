@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Stacks {
-    private ArrayList<Stack<Character>> s;
+    private List<ArrayDeque<Character>> s;
 
-    public Stacks(ArrayList<String> lines){
+    public Stacks(List<String> lines){
         // Read how many stacks there are
         String[] parts = lines.get(lines.size()-1).trim().split("\\s+");
         int numStacks = parts.length;
-        s = new ArrayList<Stack<Character>>(numStacks);
+        s = new ArrayList<>(numStacks);
         for (int j = 0; j < numStacks; j++){
-            s.add(j, new Stack<Character>());
+            s.add(j, new ArrayDeque<Character>());
         }
         for (int i=lines.size()-2; i>=0; i--){
             for (int j = 0; j < numStacks; j++){
@@ -22,7 +22,7 @@ public class Stacks {
         }
     }
 
-    public Stack<Character> getStack(int index) {
+    public Deque<Character> getStack(int index) {
         return s.get(index);
     }
 
@@ -35,7 +35,7 @@ public class Stacks {
 
     public String topOfStacks() {
         StringBuilder sb = new StringBuilder();
-        for (Stack<Character> sc : s) {
+        for (Deque<Character> sc : s) {
             sb.append(sc.peek());
         }
         return sb.toString();

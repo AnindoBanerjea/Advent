@@ -1,10 +1,10 @@
 import java.util.*;
 
 public class Plan {
-    private ArrayList<Move> p;
+    private final List<Move> p;
 
-    public Plan(ArrayList<String> lines) {
-        p = new ArrayList<Move>();
+    public Plan(List<String> lines) {
+        p = new ArrayList<>();
         for (String line : lines) {
             String[] parts = line.split(" ");
             int num = Integer.parseInt(parts[1]);
@@ -14,7 +14,7 @@ public class Plan {
         }
     }
 
-    public ArrayList<Move> getPlan() {
+    public List<Move> getPlan() {
         return p;
     }
 }

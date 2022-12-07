@@ -1,7 +1,7 @@
 public class Move {
-    private int num;
-    private int from;
-    private int to;
+    private final int num;
+    private final int from;
+    private final int to;
 
     public Move(int n, int f, int t){
         num = n;
