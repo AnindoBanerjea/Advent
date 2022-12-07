@@ -1,26 +1,23 @@
+import java.util.*;
+import java.util.stream.*;
+
+
 public class Elves {
     public static void main(String[] args) {
         RucksackList rl = new RucksackList("input.txt");
         int sum = 0;
         for (Rucksack r : rl.getRucksacks()) {
-            boolean[] seen = new boolean[52];
-            for (char c : r.getCompartment1().toCharArray()) {
-                seen[index(c)] = true;
-            }
-            for (char c : r.getCompartment2().toCharArray()) {
-                if (seen[index(c)]) {
-                    sum += priority(c);
-                    // System.out.println("C1: " + r.getCompartment1() + ", C2:" + r.getCompartment2() + ", common item: " + c + ", priority: " + priority(c));
-                    break;
-                }
-            }
+            Set<Character> set1 = r.getCompartment1().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+            Set<Character> set2 = r.getCompartment2().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+            set1.retainAll(set2);
+            sum += priority(set1.iterator().next());
         }
         System.out.println(sum);
     }  
     
     private static int index (char c) {
-        if (c >= 'a' && c <= 'z') return (int)(c - 'a');
-        return (int)(c - 'A' + 26);
+        if (c >= 'a' && c <= 'z') return c - 'a';
+        return c - 'A' + 26;
     }
 
     private static int priority (char c) {
