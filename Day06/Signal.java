@@ -1,6 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.*;
 
 
 public class Signal {
@@ -11,12 +12,9 @@ public class Signal {
 
     public Signal(String filename) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+            List<String> lines = Files.readAllLines(Paths.get(filename));
             // there is only one line, so don't look
-            signal = line.toCharArray();
-
-            reader.close();
+            signal = lines.get(0).toCharArray();
         } catch (IOException e) {
             e.printStackTrace();
         }
