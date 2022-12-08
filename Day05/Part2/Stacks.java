@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Stacks {
-    private List<ArrayDeque<Character>> s;
+    private List<Deque<Character>> s;
 
     public Stacks(List<String> lines){
         // Read how many stacks there are
