@@ -2,10 +2,10 @@ import java.util.*;
 import java.lang.Math;
 
 public class Node {
-    private List<Node> children;
-    private Node parent;
+    private final List<Node> children;
+    private final Node parent;
     private int size;
-    private String name;
+    private final String name;
 
     public Node(String name, Node parent) {
         // Constructor for directory nodes
