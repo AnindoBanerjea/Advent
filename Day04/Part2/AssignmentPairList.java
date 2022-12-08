@@ -7,10 +7,10 @@ import java.util.*;
 public class AssignmentPairList {
    
     
-    private ArrayList<RangePair> rs;
+    private List<RangePair> rs;
 
     public AssignmentPairList(String filename) {
-        this.rs = new ArrayList<RangePair>();
+        this.rs = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filename));
             for (String line : lines) {
@@ -28,7 +28,7 @@ public class AssignmentPairList {
         }
     }
 
-    public ArrayList<RangePair> getRangePairs() {
+    public List<RangePair> getRangePairs() {
         return rs;
     }
 }
