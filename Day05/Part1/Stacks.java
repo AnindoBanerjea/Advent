@@ -10,7 +10,7 @@ public class Stacks {
         int numStacks = parts.length;
         s = new ArrayList<>(numStacks);
         for (int j = 0; j < numStacks; j++){
-            s.add(j, new ArrayDeque<Character>());
+            s.add(j, new ArrayDeque<>());
         }
         for (int i=lines.size()-2; i>=0; i--){
             for (int j = 0; j < numStacks; j++){
