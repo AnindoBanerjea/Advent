@@ -21,20 +21,13 @@ public class DirectoryTree {
                     current = root;          
                 } else if (line.matches("dir [a-z]+")) {
                     // create a directory node under the current node
-                    String childName = line.substring(4);
-                    Node child = new Node(childName, current);
-                    current.getChildren().add(child);
+                    current.getChildren().add(new Node(line.substring(4), current));
                 } else if (line.matches("\\d+ [a-z.]+")) {
                     // create a file node under the current node
-                    int size = Integer.parseInt(part[0]);
-                    String name = part[1];
-                    Node child = new Node(name, size, current);
-                    current.getChildren().add(child);
+                    current.getChildren().add(new Node(part[1], Integer.parseInt(part[0]), current));
                 } else if (line.matches("\\$ cd [a-z]+")) {
                     // change the current directory to the child node with the matching name
-                    String name = part[2];
-                    Node child = current.findChildByName(name);
-                    current = child;
+                    current = current.findChildByName(part[2]);
                 } else if (line.matches("\\$ cd ..")) {
                     // change the current directory to the parent
                     current = current.getParent();
