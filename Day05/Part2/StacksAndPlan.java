@@ -8,12 +8,17 @@ public class StacksAndPlan {
    
     
     private Stacks stacks;
-    private Plan plan;
+    private final Plan plan;
 
     public StacksAndPlan(String filename) {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(filename));
+        List<String> lines = null;
 
+        try {
+            lines = Files.readAllLines(Paths.get(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (lines != null) {
             // find the blank line
             int i;
             for (i = 0; i < lines.size(); i++) {
@@ -22,8 +27,9 @@ public class StacksAndPlan {
 
             stacks = new Stacks(lines.subList(0, i));
             plan = new Plan(lines.subList(i+1, lines.size()));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            stacks = new Stacks(new ArrayList<>());
+            plan = new Plan(new ArrayList<>());
         }
     }
 
