@@ -4,11 +4,11 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Expedition {
-    private final List<ArrayList<Integer>> elves;
+    private final List<List<Integer>> elves;
 
     public Expedition(String filename) {
         this.elves = new ArrayList<>();
-        ArrayList<Integer> currentElf = new ArrayList<>();
+        List<Integer> currentElf = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filename));
             for (String line : lines) {
@@ -25,7 +25,7 @@ public class Expedition {
         }
     }
 
-    public List<ArrayList<Integer>> getElves() {
+    public List<List<Integer>> getElves() {
         return elves;
     }
 }
