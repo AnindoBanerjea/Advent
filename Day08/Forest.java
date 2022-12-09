@@ -8,10 +8,17 @@ public class Forest {
    
     
     private final int[][] trees;
-    private final boolean[][] visibleFromLeft;
-    private final boolean[][] visibleFromRight;
-    private final boolean[][] visibleFromTop;
-    private final boolean[][] visibleFromBottom;
+    // {-1, 0} means looking up
+    // { 1, 0} means looking down
+    // { 0,-1} means looking left
+    // { 0, 1} means looking right
+    // rest combinations (like 00, or 11) are not supported
+    private static final int[][] directions = new int[][]{{0,1}, {0,-1}, {1,0}, {-1,0}};
+
+    // Visible tells you if a given tree is visible from a specific direction
+    // e.g. visible.get({0,1})[i,j] is true if tree[i][j] is visible from the left (looking right)
+    // visible.get({1,0})[i,j] is true if tree[i][j] is visible from the top (looking down)    
+    private final Map<int[], boolean[][]> visible;
 
     public Forest(String filename) {
         List<String> lines = null;
@@ -36,29 +43,22 @@ public class Forest {
         } else {
             trees = new int[0][0];
         }
-        visibleFromLeft = new boolean[trees.length][trees[0].length];
-        setVisible(visibleFromLeft, 0, 1); 
-        visibleFromRight = new boolean[trees.length][trees[0].length];
-        setVisible(visibleFromRight, 0, -1);
-        visibleFromTop = new boolean[trees.length][trees[0].length];
-        setVisible(visibleFromTop, 1, 0);
-        visibleFromBottom = new boolean[trees.length][trees[0].length];
-        setVisible(visibleFromBottom, -1, 0);
+        visible = new HashMap<>();
+        for (int[] dir : directions) {
+            boolean[][] v = new boolean[trees.length][trees[0].length];
+            setVisible(v, dir);
+            visible.put(dir, v);
+        }
     }
 
-    private void setVisible(boolean[][] visible, int dirx, int diry){
-        // dirx = -1, diry = 0 means looking up
-        // dirx =  1, diry = 0 means looking down
-        // dirx =  0, diry = -1 means looking left
-        // dirx =  0, diry =  1 means looking right
-        // rest combinations (like 00, or 11) are not supported
-        for (int i = 0; i < ((dirx == 0) ? trees[0].length : trees.length); i++){
+    private void setVisible(boolean[][] visible, int[] dir){
+        for (int i = 0; i < ((dir[0] == 0) ? trees[0].length : trees.length); i++){
             int tallest = -1;
-            for (int j = ((dirx == -1) ? trees.length -1 : ((diry == -1) ? trees[0].length -1 : 0));
-                 ((j >= 0) && (j < ((dirx == 0) ? trees[0].length : trees.length)));
-                 j += (dirx + diry)) {
-                int pointerx = ((dirx == 0) ? i : j );
-                int pointery = ((dirx == 0) ? j : i );
+            for (int j = ((dir[0] == -1) ? trees.length -1 : ((dir[1] == -1) ? trees[0].length -1 : 0));
+                 ((j >= 0) && (j < ((dir[0] == 0) ? trees[0].length : trees.length)));
+                 j += (dir[0] + dir[1])) {
+                int pointerx = ((dir[0] == 0) ? i : j );
+                int pointery = ((dir[0] == 0) ? j : i );
                 if (trees[pointerx][pointery] > tallest) {
                     visible[pointerx][pointery] = true;
                     tallest = trees[pointerx][pointery];
@@ -80,10 +80,6 @@ public class Forest {
             for (int j=0; j<trees[i].length; j++) {
                 sb.append(trees[i][j]);
             }
-            sb.append(" ");
-            for (int j=0; j<trees[i].length; j++) {
-                sb.append(visibleFromRight[i][j] ? 1 : 0);
-            }
             sb.append("\n");
         }
         return sb.toString();
@@ -93,30 +89,29 @@ public class Forest {
         int result = 0;
         for (int i=0; i<trees.length; i++) {
             for (int j=0; j<trees[i].length; j++) {
-                if (visibleFromLeft[i][j] || visibleFromRight[i][j] || visibleFromTop[i][j] || visibleFromBottom[i][j]) {
-                    result++;                    
+                boolean v = false;
+                for (int[] dir : directions) {
+                    v = v || visible.get(dir)[i][j];
+                }
+                if (v) {
+                    result++;
                 }
             }
         }
         return result;
     }
 
-    public int viewingScore(int x, int y, int dirx, int diry){
-        // dirx = -1, diry = 0 means looking up
-        // dirx =  1, diry = 0 means looking down
-        // dirx =  0, diry = -1 means looking left
-        // dirx =  0, diry =  1 means looking right
-        // rest combinations (like 00, or 11) are not supported
+    public int viewingScore(int x, int y, int[] dir){
         int score = 0;
-        for (int ij = ((dirx == 0) ? y : x) + dirx + diry;
-            ((ij >= 0) && (ij < ((dirx == 0) ? trees[0].length : trees.length)));
-              ij += (dirx + diry)){
-            int pointerx = (dirx == 00) ? x : ij;
-            int pointery = (dirx == 0) ? ij : y;
+        for (int ij = ((dir[0] == 0) ? y : x) + dir[0] + dir[1];
+            ((ij >= 0) && (ij < ((dir[0] == 0) ? trees[0].length : trees.length)));
+              ij += (dir[0] + dir[1])){
+            int pointerx = (dir[0] == 00) ? x : ij;
+            int pointery = (dir[0] == 0) ? ij : y;
             if (trees[pointerx][pointery] >= trees[x][y] ||
                 ij == 0 ||
-                ij == ((dirx == 0) ? trees[0].length-1 : trees.length -1)) {
-                score = diry*(ij-y) + dirx*(ij-x);
+                ij == ((dir[0] == 0) ? trees[0].length-1 : trees.length -1)) {
+                score = dir[1]*(ij-y) + dir[0]*(ij-x);
                 break;
             }
         }
@@ -124,10 +119,9 @@ public class Forest {
     }
 
     public int viewingScore(int x, int y){
-        int[][] dirs = new int[][]{{0,1}, {0,-1}, {1,0}, {-1,0}};
         int score = 1;
-        for (int[] dir : dirs) {
-            score = score * viewingScore(x, y, dir[0], dir[1]);
+        for (int[] dir : directions) {
+            score = score * viewingScore(x, y, dir);
         }
         return score;
     }
