@@ -3,7 +3,7 @@ import java.util.*;
 import com.google.common.collect.ImmutableMap;
 
 public class Position extends Move {
-    static final Map<Character, Move> lookup 
+    public static final Map<Character, Move> lookup 
         = ImmutableMap.of(
             'L', new Move(-1, 0),
             'R', new Move( 1, 0),
