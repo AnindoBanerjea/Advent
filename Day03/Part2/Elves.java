@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.stream.*;
+import com.google.common.primitives.Chars;
 
 public class Elves {
     public static void main(String[] args) {
@@ -10,9 +10,9 @@ public class Elves {
             System.out.println("Rucksack: " + rl.getRucksacks().get(i));
             System.out.println("Rucksack: " + rl.getRucksacks().get(i+1));
             System.out.println("Rucksack: " + rl.getRucksacks().get(i+2));
-            Set<Character> set1 = rl.getRucksacks().get(i).chars().mapToObj(e->(char)e).collect(Collectors.toSet());
-            Set<Character> set2 = rl.getRucksacks().get(i+1).chars().mapToObj(e->(char)e).collect(Collectors.toSet());
-            Set<Character> set3 = rl.getRucksacks().get(i+2).chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+            Set<Character> set1 = new HashSet<>(Chars.asList(rl.getRucksacks().get(i).toCharArray()));
+            Set<Character> set2 = new HashSet<>(Chars.asList(rl.getRucksacks().get(i+1).toCharArray()));
+            Set<Character> set3 = new HashSet<>(Chars.asList(rl.getRucksacks().get(i+2).toCharArray()));
             set1.retainAll(set2);
             set1.retainAll(set3);
             sum += priority(set1.iterator().next());
