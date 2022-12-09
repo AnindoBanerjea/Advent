@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.stream.*;
+import com.google.common.primitives.Chars;
 
 
 public class Elves {
@@ -7,8 +7,8 @@ public class Elves {
         RucksackList rl = new RucksackList("input.txt");
         int sum = 0;
         for (Rucksack r : rl.getRucksacks()) {
-            Set<Character> set1 = r.getCompartment1().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
-            Set<Character> set2 = r.getCompartment2().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+            Set<Character> set1 = new HashSet<>(Chars.asList(r.getCompartment1().toCharArray()));
+            Set<Character> set2 = new HashSet<>(Chars.asList(r.getCompartment2().toCharArray()));
             set1.retainAll(set2);
             sum += priority(set1.iterator().next());
         }
