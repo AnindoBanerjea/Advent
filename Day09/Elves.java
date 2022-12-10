@@ -1,12 +1,15 @@
+import java.io.IOException;
+
+
 public class Elves {
-    public static void main(String[] args) {
-        if (args.length == 0 || !args[0].matches("^\\d+$")) {
-            System.out.println("Give the length of the snake as the argument.");
-        } else {
-            int length = Integer.parseInt(args[0]);
-            System.out.println("Solving for snake length " + length + ".");
+    public static void main(String[] args) throws IOException {
+        if (args.length == 0) {
+            args = new String[] { "2", "10" };
+        }
+        for (String arg : args) {
+            int length = Integer.parseInt(arg);
             Moves f = new Moves("input.txt", length);
-            System.out.println(f.getVisited().size());
+            System.out.printf("Tail of snake with length %d visits %d places%n", length, f.getVisited().size());
         }
     }
 }

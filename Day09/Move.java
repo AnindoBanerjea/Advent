@@ -1,15 +1,29 @@
+import java.util.Objects;
+
+
 public class Move {
     protected int x;
     protected int y;
+
     public Move(int x, int y) {
         this.x = x;
         this.y = y;
     }
-    public int getX() {
-        return x;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Move)) {
+            return false;
+        }
+        Move move = (Move) o;
+        return x == move.x && y == move.y;
     }
-    public int getY() {
-        return y;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
-    
 }
