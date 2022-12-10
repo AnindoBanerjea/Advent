@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -19,19 +19,17 @@ public class Position extends Move {
     public void follow(Position h){
         // this is the tail or body of the node following head, h is the head
 
-        // if we move, how much should we move x. -1 means one step left. 1 means one step right. 0 means don't move
-        int stepx = h.x > this.x ? 1 : h.x < this.x ? -1 : 0;
-        
-        // if we move, how much should we move y. -1 means one step down. 1 means one step up. 0 means don't move
-        int stepy = h.y > this.y ? 1 : h.y < this.y ? -1 : 0;
+        // How far off are we
+        int deltax = h.x - this.x;
+        int deltay = h.y - this.y;
 
-        // Now do we move at all? We move if any of the dimensions is off by more than 1
-        if (Math.abs(h.x - this.x) > 1 ||
-            Math.abs(h.y - this.y) > 1) {
+        // We move if any of the dimensions is off by more than 1
+        if (Math.abs(deltax) > 1 ||
+            Math.abs(deltay) > 1) {
 
-            // if we move at all, we move on both axes, even if we are off by only 1
-            this.x += stepx;
-            this.y += stepy;
+            // if we move at all, we move on both axes by zero or one step, even if we are off by only 1
+            this.x += Integer.signum(deltax);
+            this.y += Integer.signum(deltay);
         }
     }
 
@@ -50,22 +48,5 @@ public class Position extends Move {
     }
 
 
-    @Override public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
- 
-        if (other == null || other.getClass() != this.getClass()) {
-            return false;
-        }
- 
-        Position p = (Position) other;        
-        return this.x == p.x && this.y == p.y;       
-    }
 
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.x, this.y);
-    }
 }
