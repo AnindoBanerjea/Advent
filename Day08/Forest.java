@@ -18,15 +18,10 @@ public class Forest {
     // Visible tells you if a given tree is visible from a specific direction
     // e.g. visible.get({0,1})[i,j] is true if tree[i][j] is visible from the left (looking right)
     // visible.get({1,0})[i,j] is true if tree[i][j] is visible from the top (looking down)    
-    private final Map<int[], boolean[][]> visible;
+    private final boolean[][] visible;
 
-    public Forest(String filename) {
-        List<String> lines = null;
-        try {
-            lines = Files.readAllLines(Paths.get(filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Forest(String filename) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filename));
 
         if (lines != null && lines.size() > 0) {
             int m = lines.size();
@@ -43,21 +38,21 @@ public class Forest {
         } else {
             trees = new int[0][0];
         }
-        visible = new HashMap<>();
+        visible = new boolean[trees.length][trees[0].length];
         for (int[] dir : directions) {
-            boolean[][] v = new boolean[trees.length][trees[0].length];
-            setVisible(v, dir);
-            visible.put(dir, v);
+            setVisible(dir);
         }
     }
 
-    private void setVisible(boolean[][] visible, int[] dir){
+    private void setVisible(int[] dir){
+        // If dir[0] is zero, that means we are looking vertically, so we will have to swap our i and j
+        // as well as use trees[0].length instead of trees.length to check for the end of the column
+        boolean swap = (dir[0] == 0);
         // Generic loop that can go right to left, left to right, bottom to top or top to bottom through the array
         // Outer loop can be for rows or colums (we will swap using ii and jj later), but it is always forward
-        for (int i = 0; i < ((dir[0] == 0) ? trees[0].length : trees.length); i++){
+        for (int i = 0; i < (swap ? trees[0].length : trees.length); i++){
             int tallest = -1;
-            for (
-                 // inner loop can be backwards if direction is negative, if it is backwards, start from 
+            for (// inner loop can be backwards if direction is negative, if it is backwards, start from 
                  // tree.length - 1 or tree[0].length - 1 depending on direction. Else start from 0.
                  int j = ((dir[0] == -1) ? trees.length -1 : ((dir[1] == -1) ? trees[0].length -1 : 0));
                  // termination condition is written to be able to handle either direction of travel
@@ -66,16 +61,17 @@ public class Forest {
                  // direction of travel
                  j += (dir[0] + dir[1])) {
                 // if we are moving horizontally, keep the order. If we are moving vertically, swap i and j 
-                int ii = ((dir[0] == 0) ? i : j );
-                int jj = ((dir[0] == 0) ? j : i );
-                if (trees[ii][jj] > tallest) {
-                    visible[ii][jj] = true;
-                    tallest = trees[ii][jj];
-                } else {
-                    visible[ii][jj] = false;
-                }
+                tallest = setVisible(swap ? i : j, swap ? j : i, tallest);
             }
         }            
+    }
+
+    private int setVisible(int ii, int jj, int tallest) {
+        if (trees[ii][jj] > tallest) {
+            visible[ii][jj] = true;
+            return trees[ii][jj];
+        }
+        return tallest;
     }
 
 
@@ -98,11 +94,7 @@ public class Forest {
         int result = 0;
         for (int i=0; i<trees.length; i++) {
             for (int j=0; j<trees[i].length; j++) {
-                boolean v = false;
-                for (int[] dir : directions) {
-                    v = v || visible.get(dir)[i][j];
-                }
-                if (v) {
+                if (visible[i][j]) {
                     result++;
                 }
             }
@@ -116,7 +108,7 @@ public class Forest {
         // if looking up or down, intialize ij (because it can represent either i or j) to x or y (depending on
         // whethere we are doing horizontally or vertitally) + or - 1 depending on the direction. Since only one
         // of dir[0] or dir[1] can be non-zero, we just add both to get the +-1
-        for (int ij = ((dir[0] == 0) ? y : x) + dir[0] + dir[1];
+        for (int ij = (dir[0] == 0 ? y : x) + dir[0] + dir[1];
              // The termination condition handles both zero and tree length
              ((ij >= 0) && (ij < ((dir[0] == 0) ? trees[0].length : trees.length)));
              // for the increment, since only one of dir[0] or dir[1] can be non-zero, we just add both
