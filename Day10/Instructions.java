@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Instructions {
 
-    List<Integer> xvalue = new ArrayList<>();
-    List<Integer> signal = new ArrayList<>();
+    private final List<Integer> xvalue = new ArrayList<>();
+    private final List<Integer> signal = new ArrayList<>();
     public Instructions(String filename) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
 
