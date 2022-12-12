@@ -1,29 +1,31 @@
 import java.util.List;
 
 public class Monkey {
-    private final List<Integer> items;
+    private final List<Long> items;
 
     private int inspectcount;
     private final char operator;
     private final int operand;
     private final int decayfactor;
     private final int divisor;
+    private int divisorproduct;
     private final int truetarget;
     private final int falsetarget;
 
-    public Monkey(List<Integer> items, char operator, int operand, int decayfactor, int divisor, int truetarget, int falsetarget) {
+    public Monkey(List<Long> items, char operator, int operand, int decayfactor, int divisor, int truetarget, int falsetarget) {
         this.items = items;
         this.operator = operator;
         this.operand = operand;
         this.decayfactor = decayfactor;
         this.divisor = divisor;
+        this.divisorproduct = divisor;
         this.truetarget = truetarget;
         this.falsetarget = falsetarget;
         this.inspectcount = 0;
     }
 
-    public int operate(int worry) {
-        int result = -1;
+    public long operate(long worry) {
+        long result = -1;
         switch (operator) {
             case '+' -> result = worry + operand;
             case '*' -> result = worry * operand;
@@ -34,17 +36,25 @@ public class Monkey {
         return result;
     }
 
-    public int decay(int worry) {
-        return worry / decayfactor;
+    public void setDivisorproduct(int divisorproduct) {
+        this.divisorproduct = divisorproduct;
     }
 
-    public boolean test(int worry){
+    public int getDivisor() {
+        return divisor;
+    }
+
+    public long decay(long worry) {
+        return (worry / decayfactor) % divisorproduct;
+    }
+
+    public boolean test(long worry){
         return ((worry % divisor) == 0);
     }
 
 
 
-    public void appendItem(int i){
+    public void appendItem(long i){
         items.add(i);
     }
 
@@ -56,11 +66,12 @@ public class Monkey {
         return falsetarget;
     }
 
-    public List<Integer> getItems() {
+    public List<Long> getItems() {
         return this.items;
     }
 
     public int getInspectCount() {
         return inspectcount;
     }
+
 }

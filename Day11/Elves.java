@@ -7,7 +7,7 @@ public class Elves {
         }
 
         for (String arg : args) {
-            String filename = "test.txt";
+            String filename = "input.txt";
             int part = Integer.parseInt(arg);
             System.out.printf("Solving part %d with input %s\n", part, filename);
             Troop troop = new Troop(filename, part);
