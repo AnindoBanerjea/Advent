@@ -8,11 +8,17 @@ import java.util.List;
 public class Troop {
 
     private final List<Monkey> monkeys = new ArrayList<>();
+    private final int part;
+
     public Troop(String filename, int part) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
-        List<Integer> items = null;
+        this.part = part;
+        List<Long> items = null;
         char operator = '\0';
-        int operand=0, divisor=0, truetarget=0, falsetarget=0;
+        long operand=0;
+        long divisor=0;
+        int truetarget=0;
+        int falsetarget=0;
         for (String line : lines) {
             String[] parts = line.trim().split(":");
             String[] secondpart = (parts.length > 1) ? parts[1].trim().split(" +") : null;
@@ -21,7 +27,7 @@ public class Troop {
                     items = new ArrayList<>();
                     for (int i = 0; i < secondpart.length; i++) {
                         String nextitem = secondpart[i].replaceAll(",$", "");
-                        int next = Integer.parseInt(nextitem);
+                        long next = Long.parseLong(nextitem);
                         items.add(next);
                     }
                     break;
@@ -29,23 +35,32 @@ public class Troop {
                     operator = secondpart[3].charAt(0);
                     if (secondpart[4].equals("old")) {
                         operator = '^';
-                        operand = 2;
+                        operand = 2L;
                      } else {
-                        operand = Integer.parseInt(secondpart[4]);
+                        operand = Long.parseLong(secondpart[4]);
                      }
                     break;
                 case "Test":
-                    divisor = Integer.parseInt(secondpart[2]);
+                    divisor = Long.parseLong(secondpart[2]);
                     break;
                 case "If true":
                     truetarget = Integer.parseInt(secondpart[3]);
                     break;
                 case "If false":
                     falsetarget = Integer.parseInt(secondpart[3]);
-                    monkeys.add(new Monkey(items, operator, operand, ((part == 1) ? 3 : 1), divisor, truetarget, falsetarget));
+                    monkeys.add(new Monkey(items, operator, operand, 3, divisor, truetarget, falsetarget));
                     break;
                 default:
                     break;
+            }
+        }
+        if (part == 2) {
+            long factor = 1;
+            for (Monkey monkey: monkeys) {
+                factor = factor * monkey.getDivisor();
+            }
+            for (Monkey monkey: monkeys) {
+                monkey.setDecayfactor(factor);
             }
         }
     }
@@ -58,9 +73,9 @@ public class Troop {
 
     public void executeRound(Monkey m) {
         while (!m.getItems().isEmpty()) {
-            int i = (Integer)m.getItems().remove(0);
+            long i = m.getItems().remove(0);
             i = m.operate(i);
-            i = m.decay(i);
+            i = part == 1 ? m.decay1(i) : m.decay2(i);
             if (m.test(i)) {
                 monkeys.get(m.getTrueTarget()).appendItem(i);
             } else {

@@ -1,17 +1,17 @@
 import java.util.List;
 
 public class Monkey {
-    private final List<Integer> items;
+    private final List<Long> items;
 
     private int inspectcount;
     private final char operator;
-    private final int operand;
-    private final int decayfactor;
-    private final int divisor;
+    private final long operand;
+    private long decayfactor;
+    private final long divisor;
     private final int truetarget;
     private final int falsetarget;
 
-    public Monkey(List<Integer> items, char operator, int operand, int decayfactor, int divisor, int truetarget, int falsetarget) {
+    public Monkey(List<Long> items, char operator, long operand, long decayfactor, long divisor, int truetarget, int falsetarget) {
         this.items = items;
         this.operator = operator;
         this.operand = operand;
@@ -22,8 +22,12 @@ public class Monkey {
         this.inspectcount = 0;
     }
 
-    public int operate(int worry) {
-        int result = -1;
+    public void setDecayfactor(long value) {
+        decayfactor = value;
+    }
+
+    public long operate(long worry) {
+        long result = -1;
         switch (operator) {
             case '+' -> result = worry + operand;
             case '*' -> result = worry * operand;
@@ -34,17 +38,21 @@ public class Monkey {
         return result;
     }
 
-    public int decay(int worry) {
+    public long decay1(long worry) {
         return worry / decayfactor;
     }
 
-    public boolean test(int worry){
+    public long decay2(long worry) {
+        return worry % decayfactor;
+    }
+
+    public boolean test(long worry){
         return ((worry % divisor) == 0);
     }
 
 
 
-    public void appendItem(int i){
+    public void appendItem(long i){
         items.add(i);
     }
 
@@ -56,11 +64,15 @@ public class Monkey {
         return falsetarget;
     }
 
-    public List<Integer> getItems() {
+    public List<Long> getItems() {
         return this.items;
     }
 
     public int getInspectCount() {
         return inspectcount;
+    }
+
+    public long getDivisor() {
+        return divisor;
     }
 }
