@@ -7,8 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 12 done. Checking in everything.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Don't understand why this changed.">
+      <change beforePath="$PROJECT_DIR$/../Day11/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +22,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2InNGVIBFDuLq5PYl4EbvWMcfqH" />
   <component name="ProjectViewState">
@@ -37,8 +37,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
   <component name="RunManager">
@@ -71,20 +70,12 @@
       <option name="project" value="LOCAL" />
       <updated>1670818433058</updated>
     </task>
-    <task id="LOCAL-00002" summary="Day 12 done. Checking in everything.">
-      <created>1670895728820</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1670895728820</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed to long and added modulo operator. Day 11 works now." />
     <MESSAGE value="Don't understand why this changed." />
-    <MESSAGE value="Day 12 done. Checking in everything." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 12 done. Checking in everything." />
+    <option name="LAST_COMMIT_MESSAGE" value="Don't understand why this changed." />
   </component>
 </project>
