@@ -7,15 +7,17 @@ import java.util.*;
 public class Signal {
 
     private final List<Packet> data;
-    int part;
+    private final int part;
+    private boolean verbose;
 
-    public Signal(String filename, int part) throws IOException {
+    public Signal(String filename, int part, boolean verbose) throws IOException {
         this.part = part;
+        this.verbose = verbose;
         data = new ArrayList<>();
         List<String> lines = Files.readAllLines(Paths.get(filename));
         for (int i=0; i<lines.size(); i+=3) {
-            data.add(new Packet(lines.get(i)));
-            data.add(new Packet(lines.get(i+1)));
+            data.add(new Packet(lines.get(i), verbose));
+            data.add(new Packet(lines.get(i+1), verbose));
         }
     }
     @Override
@@ -30,13 +32,14 @@ public class Signal {
         return sb.toString();
     }
 
-    public int sumIndicesRightOrder(boolean verbose) {
+    public int sumIndicesRightOrder() {
         int sumIndices = 0;
         for (int index = 1; index * 2 <= data.size(); index++) {
             if (verbose) System.out.printf("== Pair %d ==\n", index);
             Packet p1 = data.get((index-1)*2);
             Packet p2 = data.get((index-1)*2 + 1);
-            if (p1.compareTo(p2, verbose, "") < 0) {
+            p1.setIndent("");
+            if (p1.compareTo(p2) < 0) {
                 sumIndices += index;
             }
             if (verbose) System.out.println();
@@ -52,7 +55,7 @@ public class Signal {
         data.addAll(dividers);
     }
 
-    public int decoderKey(List<Packet> dividers, boolean verbose) {
+    public int decoderKey(List<Packet> dividers) {
         int result = 1;
         for (Packet divider : dividers) {
             for (int i=0; i<data.size(); i++) {
@@ -63,5 +66,12 @@ public class Signal {
             }
         }
         return result;
+    }
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+        for (Packet p : data) {
+            p.setVerbose(verbose);
+        }
     }
 }

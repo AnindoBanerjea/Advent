@@ -8,54 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 13 done. Checking in everything.">
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/libraries/guava_31_1_jre.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/Elves.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/Elves.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/Move.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/Position.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/Terrain.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day12/out/production/Elves/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/guava_31_1_jre.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elves.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Elves.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Packet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Signal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/Day11.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/Elves.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/Monkey.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/Troop.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Day11/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/libraries/guava_31_1_jre.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/Elves.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/Elves.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/Packet.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/Signal.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Elves/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day12/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Elves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Packet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Signal.java" beforeDir="false" afterPath="$PROJECT_DIR$/Signal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +32,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2InNGVIBFDuLq5PYl4EbvWMcfqH" />
   <component name="ProjectViewState">
@@ -131,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670895728820</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Day 13 done. Checking in everything.">
+      <created>1670974968197</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670974968197</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -140,5 +103,16 @@
     <MESSAGE value="Day 12 done. Checking in everything." />
     <MESSAGE value="Day 13 done. Checking in everything." />
     <option name="LAST_COMMIT_MESSAGE" value="Day 13 done. Checking in everything." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Packet.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

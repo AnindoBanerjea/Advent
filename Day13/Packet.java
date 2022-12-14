@@ -3,8 +3,13 @@ import java.util.List;
 
 public class Packet implements Comparable<Packet> {
     private final List<Object> data;
+    private boolean verbose;
+    private String indent;
 
-    public Packet(String s) {
+
+
+    public Packet(String s, boolean verbose) {
+        this.verbose = verbose;
         data = new ArrayList<>();
         // drop the first [ and last ]
         String trimmed = s.substring(1, s.length()-1);
@@ -26,7 +31,7 @@ public class Packet implements Comparable<Packet> {
                     if (c == '[') count++;
                     else if (c == ']') count--;
                     if (count == 0) {
-                        data.add(new Packet(trimmed.substring(0,i+1)));
+                        data.add(new Packet(trimmed.substring(0,i+1), verbose));
                         if (i+2 < trimmed.length()) {
                             trimmed = trimmed.substring(i + 2);
                         } else {
@@ -37,6 +42,9 @@ public class Packet implements Comparable<Packet> {
                 }
             }
         }
+    }
+    public void setIndent(String indent) {
+        this.indent = indent;
     }
 
     @Override
@@ -58,10 +66,9 @@ public class Packet implements Comparable<Packet> {
         return sb.append(']').toString();
     }
 
+
+    @Override
     public int compareTo(Packet other) {
-        return compareTo(other, false, "");
-    }
-    public int compareTo(Packet other, boolean verbose, String indent) {
         String mixedindent = "";
         if (verbose) System.out.printf("%s- Compare %s vs %s\n", indent, this, other);
         if (this.data.size() == 0 && other.data.size() == 0) return 0;
@@ -101,12 +108,14 @@ public class Packet implements Comparable<Packet> {
                     }
                 }
                 Packet thisNextP = (thisNext.getClass() == Integer.class) ?
-                        new Packet("[" + thisNext + "]") :
+                        new Packet("[" + thisNext + "]", verbose) :
                         (Packet) thisNext;
                 Packet otherNextP = (otherNext.getClass() == Integer.class) ?
-                        new Packet("[" + otherNext + "]") :
+                        new Packet("[" + otherNext + "]", verbose) :
                         (Packet) otherNext;
-                int compare = thisNextP.compareTo(otherNextP, verbose, indent + "  " + mixedindent);
+                thisNextP.setIndent(indent + "  " + mixedindent);
+                thisNextP.setVerbose(verbose);
+                int compare = thisNextP.compareTo(otherNextP);
                 if (compare != 0) return compare;
             }
         }
@@ -122,4 +131,7 @@ public class Packet implements Comparable<Packet> {
     }
 
 
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
 }

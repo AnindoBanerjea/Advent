@@ -13,20 +13,21 @@ public class Elves {
         for (String arg : args) {
             int part = Integer.parseInt(arg);
             System.out.printf("Solving part %d with input %s\n", part, filename);
-            Signal signal = new Signal(filename, part);
+            Signal signal = new Signal(filename, part, verbose);
             if (verbose) System.out.println(signal);
             if (part == 1) {
-                System.out.println(signal.sumIndicesRightOrder(verbose));
+                System.out.println(signal.sumIndicesRightOrder());
             }  else {
                 List<Packet> dividers = new ArrayList<>();
-                Packet d1 = new Packet("[[2]]");
+                Packet d1 = new Packet("[[2]]", verbose);
                 dividers.add(d1);
-                Packet d2 = new Packet("[[6]]");
+                Packet d2 = new Packet("[[6]]", verbose);
                 dividers.add(d2);
                 signal.addDividerPackets(dividers);
+                signal.setVerbose(false);
                 signal.sort();
                 if (verbose) System.out.println(signal);
-                System.out.println(signal.decoderKey(dividers, verbose));
+                System.out.println(signal.decoderKey(dividers));
             }
         }
     }
