@@ -7,11 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 12 done. Checking in everything.">
-      <change afterPath="$PROJECT_DIR$/../Day15/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day15/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day14/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day14/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Don't understand why this changed." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,30 +19,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
-  </component>
   <component name="ProjectId" id="2InNGVIBFDuLq5PYl4EbvWMcfqH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/baner/Advent/Day12",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Elves" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Elves" />
-      <module name="Elves" />
+      <module name="Day11" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -60,7 +51,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Don't understand why this changed." />
+      <changelist id="be099d67-dddb-44c1-b5bc-f452e8cfa45e" name="Changes" comment="" />
       <created>1670813294175</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -73,20 +64,12 @@
       <option name="project" value="LOCAL" />
       <updated>1670818433058</updated>
     </task>
-    <task id="LOCAL-00002" summary="Day 12 done. Checking in everything.">
-      <created>1670895728820</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1670895728820</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed to long and added modulo operator. Day 11 works now." />
     <MESSAGE value="Don't understand why this changed." />
-    <MESSAGE value="Day 12 done. Checking in everything." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 12 done. Checking in everything." />
+    <option name="LAST_COMMIT_MESSAGE" value="Don't understand why this changed." />
   </component>
 </project>

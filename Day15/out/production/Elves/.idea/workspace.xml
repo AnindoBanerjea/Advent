@@ -7,15 +7,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 12 done. Checking in everything.">
-      <change afterPath="$PROJECT_DIR$/../Day15/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day15/Position.java" afterDir="false" />
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Finished day 14.">
+      <change afterPath="$PROJECT_DIR$/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Position.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day12/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day12/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Day14/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day14/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -35,14 +43,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/baner/Advent/Day12",
+    "last_opened_file_path": "C:/Users/baner/Advent/Day15",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\baner\Advent\Day15" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Elves" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Elves" />
@@ -80,13 +92,38 @@
       <option name="project" value="LOCAL" />
       <updated>1670895728820</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Day 13 done. Checking in everything.">
+      <created>1670974968197</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670974968197</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Move verbose and indent into the object.">
+      <created>1670993332686</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670993332686</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finished day 14.">
+      <created>1671061282586</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671061282586</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed to long and added modulo operator. Day 11 works now." />
     <MESSAGE value="Don't understand why this changed." />
     <MESSAGE value="Day 12 done. Checking in everything." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 12 done. Checking in everything." />
+    <MESSAGE value="Day 13 done. Checking in everything." />
+    <MESSAGE value="Move verbose and indent into the object." />
+    <MESSAGE value="Finished day 14" />
+    <MESSAGE value="Finished day 14." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished day 14." />
   </component>
 </project>
