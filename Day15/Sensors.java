@@ -20,7 +20,6 @@ public class Sensors {
     private final boolean verbose;
     private final int part;
 
-    int maxdistance;
     public Sensors(String filename, int part, boolean verbose) throws IOException {
         sensors = new ArrayList<>();
         beacons = new ArrayList<>();
@@ -28,7 +27,7 @@ public class Sensors {
         this.part = part;
         min = new Position(MAX_VALUE, MAX_VALUE);
         max = new Position(MIN_VALUE, MIN_VALUE);
-        maxdistance = 0;
+        int maxdistance = 0;
         List<String> lines = Files.readAllLines(Paths.get(filename));
         for (String line : lines) {
             Pattern pattern = Pattern.compile("Sensor at x=(-?\\d+), y=(-?\\d+): closest beacon is at x=(-?\\d+), y=(-?\\d+)");
