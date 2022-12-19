@@ -194,7 +194,6 @@ public class Valves {
 
     public void yourLoop(Deque<Minute> history, List<Valve> toVisit) {
         // single loop only for your destination. Elephant continues his path
-        // Only reset currentTarget after backtracking
         Minute top = history.peek();
         Valve current = top.getCurrent();
         Valve currentElephant = top.getCurrentElephant();
