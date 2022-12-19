@@ -98,6 +98,334 @@ public class Valves {
 
     }
 
+    public void doubleLoop(Deque<Minute> history, List<Valve> toVisit) {
+        // Double loop over both your destination and the elephant's destination
+        // Both currentTarget and currentTargetElephant were null
+        Minute top = history.peek();
+        Valve current = top.getCurrent();
+        Valve currentElephant = top.getCurrentElephant();
+
+        for (Valve dest : toVisit) {
+            Valve yourOpen = null;
+            int yourPressure = 0;
+            Valve elephantOpen = null;
+            int elephantPressure = 0;
+            Valve currentTarget;
+            if (current == dest) {
+                // we are already there, we don't need to look up the path
+                // double check its not already open in the meantime
+                if (!top.getOpen().contains(current)) {
+                    top.setDescription("You open valve " + current.getName() + ".\n");
+                    yourOpen = current;
+                    yourPressure = current.getRate();
+                }
+                // currentTarget was already null so we don't need to set it
+                currentTarget = null;
+            } else {
+                Valve nextToVisit = nextOnShortestPath(current, dest);
+                top.setDescription("You move to valve " + nextToVisit.getName() + ".\n");
+                current = nextToVisit;
+                currentTarget = dest;
+            }
+            if (currentElephant != null) {
+                // We have a trained elephant (i.e. part2). The elephant also does not have a target, so
+                // loop inside loop to find all possible combinations of targets for both.
+                List<Valve> elephantToVisit = new ArrayList<>(toVisit);
+                elephantToVisit.remove(dest);
+                for (Valve elephantDest : elephantToVisit) {
+                    Valve currentTargetElephant;
+                    if (currentElephant == elephantDest) {
+                        // Elephant is already there, we don't need to look up the path
+                        // double check not already open
+                        if (!top.getOpen().contains(elephantDest) &&
+                                (yourOpen == null || !yourOpen.equals(currentElephant))) {
+                            top.setDescriptionElephant("Elephant opens valve " +
+                                    currentElephant.getName() + ".\n");
+                            elephantOpen = currentElephant;
+                            elephantPressure = currentElephant.getRate();
+                        }
+                        // set currentTargetElephant to null, so we find another
+                        // target in the next round.
+                        currentTargetElephant = null;
+                    } else {
+                        Valve nextToVisit = nextOnShortestPath(currentElephant, elephantDest);
+                        top.setDescriptionElephant("The elephant moves to valve " +
+                                nextToVisit.getName() + ".\n");
+                        currentElephant = nextToVisit;
+                        currentTargetElephant = elephantDest;
+                    }
+                    Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+                    if (yourOpen != null) tempOpen.add(yourOpen);
+                    if (elephantOpen != null) tempOpen.add(elephantOpen);
+                    Minute newminute = new Minute(current, currentTarget, currentElephant,
+                            currentTargetElephant, tempOpen,
+                            top.getPressure() + yourPressure + elephantPressure,
+                            top.getVisited(), history.size() + 1);
+                    history.push(newminute);
+                    permuteAndVisit(history);
+                    history.pop();
+                    // We have to set currentElephant because we just undid what
+                    // it were doing and now we will try something else
+                    top = history.peek();
+                    currentElephant = top.getCurrentElephant();
+                    // But we don't reset current because we want to stay there
+                    // we only reset current when we hit the dest loop
+                }
+            } else {
+                Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+                if (yourOpen != null) tempOpen.add(yourOpen);
+                // No trained elephant so just process for you
+                Minute newminute = new Minute(current, currentTarget, null,
+                        null, tempOpen,
+                        top.getPressure() + yourPressure,
+                        top.getVisited(), history.size() + 1);
+                history.push(newminute);
+                permuteAndVisit(history);
+                history.pop();
+            }
+            // We have to set current and currentElephant because we just undid what
+            // they were doing and now we will try something else
+            top = history.peek();
+            current = top.getCurrent();
+            currentElephant = top.getCurrentElephant();
+            // No need to reset currentTarget or currentElephantTarget because they are local variables
+        }
+    }
+
+    public void yourLoop(Deque<Minute> history, List<Valve> toVisit) {
+        // single loop only for your destination. Elephant continues his path
+        // Only reset currentTarget after backtracking
+        Minute top = history.peek();
+        Valve current = top.getCurrent();
+        Valve currentElephant = top.getCurrentElephant();
+
+        for (Valve dest : toVisit) {
+            // Make currentElephant target a loop variable because when we roll back to try another
+            // destination for you, we should keep the elephant going to the same one it was going before
+            Valve currentTargetElephant = top.getCurrentTargetElephant();
+            assert currentTargetElephant != null;
+            Valve currentTarget;
+            Valve yourOpen = null;
+            int yourPressure = 0;
+            Valve elephantOpen = null;
+            int elephantPressure = 0;
+            if (current == dest) {
+                // we are already there, we don't need to look up the path
+                // double check its not already open in the meantime
+                if (!top.getOpen().contains(current)) {
+                    top.setDescription("You open valve " + current.getName() + ".\n");
+                    yourOpen = current;
+                    yourPressure = current.getRate();
+                }
+                // set currentTarget to null, so we find another target in the next round
+                currentTarget = null;
+            } else {
+                Valve nextToVisit = nextOnShortestPath(current, dest);
+                top.setDescription("You move to valve " + nextToVisit.getName() + ".\n");
+                current = nextToVisit;
+                currentTarget = dest;
+            }
+            if (currentElephant != null) {
+                // We have a trained elephant (i.e. part2). the elephant was happily moving
+                // along a shortest path, so just move him along.
+                if (currentTargetElephant != currentElephant) {
+                    // Elephant is proceeding along a shortest path so just keep doing it
+                    Valve next = nextOnShortestPath(currentElephant, currentTargetElephant);
+
+                    top.setDescriptionElephant("Elephant moves to valve " + next.getName() + ".\n");
+                    currentElephant = next;
+
+                } else {
+                    // Elephant is at dest so open it
+                    // double check not already open
+                    if (!top.getOpen().contains(currentElephant) &&
+                            (yourOpen == null || !yourOpen.equals(currentElephant))) {
+                        top.setDescriptionElephant("Elephant opens valve " +
+                                currentElephant.getName() + ".\n");
+                        elephantOpen = currentElephant;
+                        elephantPressure = currentElephant.getRate();
+                    }
+                    // set currentTargetElephant to null, so we find another target
+                    // in the next round
+                    currentTargetElephant = null;
+                }
+                Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+                if (yourOpen != null) tempOpen.add(yourOpen);
+                if (elephantOpen != null) tempOpen.add(elephantOpen);
+                Minute newminute = new Minute(current, currentTarget, currentElephant,
+                        currentTargetElephant, tempOpen,
+                        top.getPressure() + yourPressure + elephantPressure,
+                        top.getVisited(), history.size() + 1);
+                history.push(newminute);
+            } else {
+                // There is no trained elephant (i.e., part 1)
+                Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+                if (yourOpen != null) tempOpen.add(yourOpen);
+                // No trained elephant so just process for you
+                Minute newminute = new Minute(current, currentTarget, currentElephant,
+                        currentTargetElephant, tempOpen,
+                        top.getPressure() + yourPressure,
+                        top.getVisited(), history.size() + 1);
+                history.push(newminute);
+            }
+            permuteAndVisit(history);
+            history.pop();
+            // We have to set current and currentElephant because we just undid what
+            // they were doing and now we will try something else
+            top = history.peek();
+            current = top.getCurrent();
+            currentElephant = top.getCurrentElephant();
+            // No need to reset currentTarget or currentTargetElephant because they are local loop variables
+        }
+    }
+    public void elephantLoop(Deque<Minute> history, List<Valve> toVisit) {
+        // currentTarget != null && currentTargetElephant == null
+        // Single loop only for the elephant. You continue your path.
+        // Only reset currentTargetElephant after backtracking
+        Minute top = history.peek();
+        Valve current = top.getCurrent();
+        Valve currentElephant = top.getCurrentElephant();
+        //Valve currentTargetElephant = top.getCurrentTargetElephant();
+        //assert currentTargetElephant == null;
+
+        // currentTargetElephant == null, so we must iterate over all elephant targets
+        // but in this case currentTarget is already set, so we don't iterate over your targets
+        List<Valve> elephantToVisit = new ArrayList<>(toVisit);
+        Valve yourOpen = null;
+        int yourPressure = 0;
+        // this is the case where you were happily moving along the shortest path
+        // so we need to move you along
+
+        // moved this out of the loop as because every time we backtrack and go to
+        // a new elephant, we want to go to the same current target
+        Valve currentTarget = top.getCurrentTarget();
+        assert currentTarget != null;
+        if (currentTarget != current) {
+            // You are proceeding along a shortest path so just keep doing it
+            Valve next = nextOnShortestPath(current, currentTarget);
+            top.setDescription("You move to valve " + next.getName() + ".\n");
+            current = next;
+        } else {
+            // You are at dest so open it
+            // double check not already open
+            if (!top.getOpen().contains(current)) {
+                top.setDescription("You open valve " + current.getName() + ".\n");
+                yourOpen = current;
+                yourPressure = current.getRate();
+            }
+            // set currentTarget to null, so we find another target in the next round
+            currentTarget = null;
+        }
+
+        Valve elephantOpen = null;
+        int elephantPressure = 0;
+        for (Valve elephantDest : elephantToVisit) {
+            Valve currentTargetElephant;
+            if (currentElephant == elephantDest) {
+                // Elephant is already there, we don't need to look up the path
+                // double check not already open
+                if (!top.getOpen().contains(currentElephant) &&
+                        (yourOpen == null || !yourOpen.equals(currentElephant))) {
+                    top.setDescriptionElephant("Elephant opens valve " +
+                            currentElephant.getName() + ".\n");
+                    elephantOpen = currentElephant;
+                    elephantPressure = currentElephant.getRate();
+                }
+                // set currentTargetElephant to null, so we find another target in the next round
+                currentTargetElephant = null;
+            } else {
+                Valve nextToVisit = nextOnShortestPath(currentElephant, elephantDest);
+                top.setDescriptionElephant("The elephant moves to valve " +
+                        nextToVisit.getName() + ".\n");
+                currentElephant = nextToVisit;
+                currentTargetElephant = elephantDest;
+            }
+            Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+            if (yourOpen != null) tempOpen.add(yourOpen);
+            if (elephantOpen != null) tempOpen.add(elephantOpen);
+            Minute newminute = new Minute(current, currentTarget, currentElephant,
+                    currentTargetElephant, tempOpen,
+                    top.getPressure() + yourPressure + elephantPressure,
+                    top.getVisited(), history.size() + 1);
+            history.push(newminute);
+            permuteAndVisit(history);
+            history.pop();
+            // We have to set currentElephant because we just undid what it was doing and now we will try
+            // something else. But current is fixed and will not change
+            top = history.peek();
+            currentElephant = top.getCurrentElephant();
+            // No need to reset currentTarget or currentTargetElephant, they are local variables
+        }
+    }
+    public void noLoop(Deque<Minute> history) {
+        // Single loop only for the elephant. You continue your path.
+        // Only reset currentTargetElephant after backtracking
+        Minute top = history.peek();
+        Valve current = top.getCurrent();
+        Valve currentElephant = top.getCurrentElephant();
+
+        // No loops so no worries about resetting
+        Valve currentTarget = top.getCurrentTarget();
+        // if currentTarget is null, this means the end when we only have the elephant to move
+        Valve currentTargetElephant = top.getCurrentTargetElephant();
+        // if currentTargetElephant is null, this means either part 1 (no elephant or the end
+        // when we only have you to move
+
+        // both you and the elephant have targets you are moving towards
+        Valve yourOpen = null;
+        int yourPressure = 0;
+        Valve elephantOpen = null;
+        int elephantPressure = 0;
+        if (currentTarget != null) {
+            if (currentTarget != current) {
+                // You are proceeding along a shortest path so just keep doing it
+                Valve next = nextOnShortestPath(current, currentTarget);
+                top.setDescription("You move to valve " + next.getName() + ".\n");
+                current = next;
+            } else {
+                // You are at dest so open it
+                // double check not already open
+                if (!top.getOpen().contains(current)) {
+                    top.setDescription("You open valve " + current.getName() + ".\n");
+                    yourOpen = current;
+                    yourPressure = current.getRate();
+                }
+                // set currentTarget to null, so we find another target in the next round
+                currentTarget = null;
+            }
+        }
+        if (currentElephant != null && currentTargetElephant != null) {
+            if (currentTargetElephant != currentElephant) {
+                // Elephant is proceeding along a shortest path so just keep doing it
+                Valve next = nextOnShortestPath(currentElephant, currentTargetElephant);
+
+                top.setDescriptionElephant("Elephant moves to valve " + next.getName() + ".\n");
+                currentElephant = next;
+
+            } else {
+                // Elephant is dest so open it
+                // double check not already open
+                if (!top.getOpen().contains(currentElephant) &&
+                        (yourOpen == null || !yourOpen.equals(currentElephant))) {
+                    top.setDescriptionElephant("Elephant opens valve " + currentElephant.getName() + ".\n");
+                    elephantOpen = currentElephant;
+                    elephantPressure = currentElephant.getRate();
+                }
+                // set currentTargetElephant to null, so we find another target in the next round
+                currentTargetElephant = null;
+            }
+        }
+        Set<Valve> tempOpen = new HashSet<>(top.getOpen());
+        if (yourOpen != null) tempOpen.add(yourOpen);
+        if (elephantOpen != null) tempOpen.add(elephantOpen);
+
+        Minute newminute = new Minute(current, currentTarget, currentElephant, currentTargetElephant,
+                tempOpen, top.getPressure() + yourPressure + elephantPressure,
+                top.getVisited(), history.size() + 1);
+        history.push(newminute);
+        permuteAndVisit(history);
+        history.pop();
+    }
 
     public void permuteAndVisit(Deque<Minute> history) {
         int remainingTime = this.boom - history.size();
@@ -139,265 +467,38 @@ public class Valves {
                 toVisit.removeAll(tooFarValves);
 
                 if (toVisit.isEmpty()) {
-                    // once all the valves are open (or too far away) just keep adding minutes until time is up
-                    // every thing is open so do nothing, just continue to minute 30
-                    currentTarget = null;
-                    currentTargetElephant = null;
-                    Minute newminute = new Minute(current, currentTarget, currentElephant, currentTargetElephant, top.getOpen(), top.getPressure(), top.getVisited(), history.size() + 1);
-                    history.push(newminute);
-                    permuteAndVisit(history);
-                    history.pop();
+                    if (currentTargetElephant != null || currentTarget != null) {
+                        // elephant or you still have one target to get
+                        noLoop(history);
+                    } else {
+                        // once all the valves are open (or too far away) just keep adding minutes until time is up
+                        // every thing is open so do nothing, just continue to minute 30
+
+                        Minute newminute = new Minute(current, currentTarget, currentElephant, currentTargetElephant,
+                                top.getOpen(), top.getPressure(), top.getVisited(), history.size() + 1);
+                        history.push(newminute);
+                        permuteAndVisit(history);
+                        history.pop();
+                    }
                 } else {
                     // There are open valves close enough to visit. So depending on if current target is null
                     // we iterate over to visit and visit them all then backtrack and continue consuming the rest
-
-                    if (currentTarget == null) {
-                        for (Valve dest : toVisit) {
-                            Valve yourOpen = null;
-                            int yourPressure = 0;
-                            Valve elephantOpen = null;
-                            int elephantPressure = 0;
-                            if (current == dest) {
-                                // we are already there, we don't need to look up the path
-                                // double check its not already open in the meantime
-                                if (!top.getOpen().contains(current)) {
-                                    top.setDescription("You open valve " + current.getName() + ".\n");
-                                    yourOpen = current;
-                                    yourPressure = current.getRate();
-                                }
-                                // set currentTarget to null, so we find another target in the next round
-                                currentTarget = null;
-                            } else {
-                                Valve nextToVisit = nextOnShortestPath(current, dest);
-                                top.setDescription("You move to valve " + nextToVisit.getName() + ".\n");
-                                current = nextToVisit;
-                                currentTarget = dest;
-                                if (history.size() == 2 && current.equals(valves.get("BB"))) {
-                                    System.out.println("Backtracked to minute 2");
-                                }
-                            }
-                            if (currentElephant != null) {
-                                // We have a trained elephant (i.e. part2). There are two possibilities here either
-                                // the elephant was happily moving along a shortest path, in which case just move
-                                // him along. Or else the elephant also does not have a target, since which case
-                                // loop inside loop to find all possible combinations of targets for both.
-                                if (currentTargetElephant != null) {
-                                    // This is the case where elephant was happily moving along a shortest path
-                                    // so we need to move him along one step in parallel
-                                    if (currentTargetElephant != currentElephant) {
-                                        // Elephant is proceeding along a shortest path so just keep doing it
-                                        Valve next = nextOnShortestPath(currentElephant, currentTargetElephant);
-
-                                        top.setDescriptionElephant("Elephant moves to valve " + next.getName() + ".\n");
-                                        currentElephant = next;
-
-                                    } else {
-                                        // Elephant is at dest so open it
-                                        // double check not already open
-                                        if (!top.getOpen().contains(currentElephant) &&
-                                            (yourOpen == null || !yourOpen.equals(currentElephant))) {
-                                            top.setDescriptionElephant("Elephant opens valve " +
-                                                    currentElephant.getName() + ".\n");
-                                            elephantOpen = currentElephant;
-                                            elephantPressure = currentElephant.getRate();
-                                        }
-                                        // set currentTargetElephant to null, so we find another target
-                                        // in the next round
-                                        currentTargetElephant = null;
-                                    }
-                                    Set<Valve> tempOpen = new HashSet<>(top.getOpen());
-                                    if (yourOpen != null) tempOpen.add(yourOpen);
-                                    if (elephantOpen != null) tempOpen.add(elephantOpen);
-                                    Minute newminute = new Minute(current, currentTarget, currentElephant,
-                                            currentTargetElephant, tempOpen,
-                                            top.getPressure() + yourPressure + elephantPressure,
-                                            top.getVisited(), history.size() + 1);
-                                    history.push(newminute);
-                                    permuteAndVisit(history);
-                                    history.pop();
-                                } else {
-                                    // both currentTarget and currentTargetElephant are null, so loop inside a loop to
-                                    // find all combinations of currentTarget and currentTargetElephant
-                                    List<Valve> elephantToVisit = new ArrayList<>(toVisit);
-                                    elephantToVisit.remove(dest);
-                                    for (Valve elephantDest : elephantToVisit) {
-                                        if (currentElephant == elephantDest) {
-                                            // Elephant is already there, we don't need to look up the path
-                                            // double check not already open
-                                            if (!top.getOpen().contains(elephantDest) &&
-                                                (yourOpen == null || !yourOpen.equals(currentElephant))) {
-                                                top.setDescriptionElephant("Elephant opens valve " +
-                                                        currentElephant.getName() + ".\n");
-                                                elephantOpen = currentElephant;
-                                                elephantPressure = currentElephant.getRate();
-                                            }
-                                            // set currentTargetElephant to null, so we find another
-                                            // target in the next round
-                                            currentTargetElephant = null;
-                                        } else {
-                                            Valve nextToVisit = nextOnShortestPath(currentElephant, elephantDest);
-                                            top.setDescriptionElephant("The elephant moves to valve " +
-                                                    nextToVisit.getName() + ".\n");
-                                            currentElephant = nextToVisit;
-                                            currentTargetElephant = elephantDest;
-                                        }
-                                        Set<Valve> tempOpen = new HashSet<>(top.getOpen());
-                                        if (yourOpen != null) tempOpen.add(yourOpen);
-                                        if (elephantOpen != null) tempOpen.add(elephantOpen);
-                                        Minute newminute = new Minute(current, currentTarget, currentElephant,
-                                                currentTargetElephant, tempOpen,
-                                                top.getPressure() + yourPressure + elephantPressure,
-                                                top.getVisited(), history.size() + 1);
-                                        history.push(newminute);
-                                        permuteAndVisit(history);
-                                        history.pop();
-                                        top = history.peek();
-                                        currentElephant = top.getCurrentElephant();
-                                    }
-                                }
-                            } else {
-                                Set<Valve> tempOpen = new HashSet<>(top.getOpen());
-                                if (yourOpen != null) tempOpen.add(yourOpen);
-                                // No trained elephant so just process for you
-                                Minute newminute = new Minute(current, currentTarget, currentElephant,
-                                        currentTargetElephant, tempOpen,
-                                        top.getPressure() + yourPressure,
-                                        top.getVisited(), history.size() + 1);
-                                history.push(newminute);
-                                permuteAndVisit(history);
-                                history.pop();
-                            }
-                            top = history.peek();
-                            current = top.getCurrent();
-                        }
-                    } else {
-                        // currentTargetElephant == null, so we must iterate over all elephant targets
-                        // but in this case currentTarget is already set, so we don't iterate over your targets
-                        List<Valve> elephantToVisit = new ArrayList<>(toVisit);
-                        Valve yourOpen = null;
-                        int yourPressure = 0;
-                        Valve elephantOpen = null;
-                        int elephantPressure = 0;
-                        for (Valve elephantDest : elephantToVisit) {
-                            if (currentElephant == elephantDest) {
-                                // Elephant is already there, we don't need to look up the path
-                                // double check not already open
-                                if (!top.getOpen().contains(currentElephant) &&
-                                    (yourOpen == null || !yourOpen.equals(currentElephant))) {
-                                    top.setDescriptionElephant("Elephant opens valve " +
-                                            currentElephant.getName() + ".\n");
-                                    elephantOpen = currentElephant;
-                                    elephantPressure = currentElephant.getRate();
-                                }
-                                // set currentTargetElephant to null, so we find another target in the next round
-                                currentTargetElephant = null;
-                            } else {
-                                Valve nextToVisit = nextOnShortestPath(currentElephant, elephantDest);
-                                top.setDescriptionElephant("The elephant moves to valve " +
-                                        nextToVisit.getName() + ".\n");
-                                currentElephant = nextToVisit;
-                                currentTargetElephant = elephantDest;
-                            }
-                            if (currentTarget != null) {
-                                // this is the case where you were happily moving along the shortest path
-                                // so we need to move you along
-                                if (currentTarget != current) {
-                                    // You are proceeding along a shortest path so just keep doing it
-                                    Valve next = nextOnShortestPath(current, currentTarget);
-                                    top.setDescription("You move to valve " + next.getName() + ".\n");
-                                    current = next;
-                                    if (history.size() == 2 && current.equals(valves.get("BB"))) {
-                                        System.out.println("Backtracked to minute 2");
-                                    }
-
-                                } else {
-                                    // You are at dest so open it
-                                    // double check not already open
-                                    if (!top.getOpen().contains(current)) {
-                                        top.setDescription("You open valve " + current.getName() + ".\n");
-                                        yourOpen = current;
-                                        yourPressure = current.getRate();
-                                    }
-                                    // set currentTarget to null, so we find another target in the next round
-                                    currentTarget = null;
-                                }
-                            }
-                            Set<Valve> tempOpen = new HashSet<>(top.getOpen());
-                            if (yourOpen != null) tempOpen.add(yourOpen);
-                            if (elephantOpen != null) tempOpen.add(elephantOpen);
-                            Minute newminute = new Minute(current, currentTarget, currentElephant,
-                                    currentTargetElephant, tempOpen,
-                                    top.getPressure() + yourPressure + elephantPressure,
-                                    top.getVisited(), history.size() + 1);
-                            history.push(newminute);
-                            permuteAndVisit(history);
-                            history.pop();
-                            top = history.peek();
-                            currentElephant = top.getCurrentElephant();
-                        }
+                    if (currentTarget == null && currentTargetElephant == null) {
+                        // Double loop with resets of both variables on the outer loop and
+                        // reset of only currentTargetElephant on the inner loop
+                        doubleLoop(history, toVisit);
+                    } else if (currentTarget == null /* && currentTargetElephant != null */) {
+                        // single loop only for your destination. Elephant continues his path
+                        // Only reset currentTarget after backtracking
+                        yourLoop(history, toVisit);
+                    } else /* if (currentTarget != null && currentTargetElephant == null) */ {
+                        // Single loop only for the elephant. You continue your path.
+                        // Only reset currentTargetElephant after backtracking
+                        elephantLoop(history, toVisit);
                     }
                 }
             } else {
-                // both you and the elephant have targets you are moving towards
-                Valve yourOpen = null;
-                int yourPressure = 0;
-                Valve elephantOpen = null;
-                int elephantPressure = 0;
-                if (currentTarget != current) {
-                    // You are proceeding along a shortest path so just keep doing it
-                    Valve next = nextOnShortestPath(current, currentTarget);
-                    if (history.size() == 2 && next.equals(valves.get("BB"))) {
-                        System.out.println("Backtracked to minute 2");
-                    }
-                    top.setDescription("You move to valve " + next.getName() + ".\n");
-                    current = next;
-                    if (history.size() == 2 && current.equals(valves.get("BB"))) {
-                        System.out.println("Backtracked to minute 2");
-                    }
-
-
-                } else {
-                    // You are at dest so open it
-                    // double check not already open
-                    if (!top.getOpen().contains(current)) {
-                        top.setDescription("You open valve " + current.getName() + ".\n");
-                        yourOpen = current;
-                        yourPressure = current.getRate();
-                    }
-                    // set currentTarget to null, so we find another target in the next round
-                    currentTarget = null;
-                }
-                if (currentElephant != null) {
-                    if (currentTargetElephant != currentElephant) {
-                        // Elephant is proceeding along a shortest path so just keep doing it
-                        Valve next = nextOnShortestPath(currentElephant, currentTargetElephant);
-
-                        top.setDescriptionElephant("Elephant moves to valve " + next.getName() + ".\n");
-                        currentElephant = next;
-
-                    } else {
-                        // Elephant is dest so open it
-                        // double check not already open
-                        if (!top.getOpen().contains(currentElephant) &&
-                            (yourOpen == null || !yourOpen.equals(currentElephant))) {
-                            top.setDescriptionElephant("Elephant opens valve " + currentElephant.getName() + ".\n");
-                            elephantOpen = currentElephant;
-                            elephantPressure = currentElephant.getRate();
-                        }
-                        // set currentTargetElephant to null, so we find another target in the next round
-                        currentTargetElephant = null;
-                    }
-                }
-                Set<Valve> tempOpen = new HashSet<>(top.getOpen());
-                if (yourOpen != null) tempOpen.add(yourOpen);
-                if (elephantOpen != null) tempOpen.add(elephantOpen);
-
-                Minute newminute = new Minute(current, currentTarget, currentElephant, currentTargetElephant,
-                        tempOpen, top.getPressure() + yourPressure + elephantPressure,
-                        top.getVisited(), history.size() + 1);
-                history.push(newminute);
-                permuteAndVisit(history);
-                history.pop();
+                noLoop(history);
             }
         }
     }

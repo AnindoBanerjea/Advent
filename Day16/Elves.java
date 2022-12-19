@@ -5,7 +5,7 @@ public class Elves {
         if (args.length == 0 || !args[0].matches("^\\d+$")) {
             args = new String[]{"2"};
         }
-        String filename = "test.txt";
+        String filename = "input.txt";
         boolean verbose = true;
         int boom;
 
@@ -15,6 +15,7 @@ public class Elves {
             System.out.printf("Solving part %d with input %s\n", part, filename);
             Valves valves = new Valves(filename, boom, part, verbose);
             valves.permuteAndVisit();
+            Minute.printHistory(valves.getStepsToMax());
             System.out.println(valves.getMaxPressure());
         }
     }

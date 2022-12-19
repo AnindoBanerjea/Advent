@@ -7,11 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Moved maxdistance to local variable.">
-      <change afterPath="$PROJECT_DIR$/../Day16/Minute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Day16/Valve.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Finished Day 15, but forgot to check in." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671227633355</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Finished Day 15, but forgot to check in.">
+      <created>1671449882557</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671449882557</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -138,7 +141,8 @@
     <MESSAGE value="Finished day 14" />
     <MESSAGE value="Finished day 14." />
     <MESSAGE value="Moved maxdistance to local variable." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved maxdistance to local variable." />
+    <MESSAGE value="Finished Day 15, but forgot to check in." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Day 15, but forgot to check in." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
