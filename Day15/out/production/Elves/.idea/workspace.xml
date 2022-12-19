@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Finished day 14.">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Moved maxdistance to local variable.">
+      <change afterPath="$PROJECT_DIR$/../Day16/Minute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Day16/Valve.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671174094457</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Moved maxdistance to local variable.">
+      <created>1671227633355</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671227633355</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -128,7 +137,8 @@
     <MESSAGE value="Move verbose and indent into the object." />
     <MESSAGE value="Finished day 14" />
     <MESSAGE value="Finished day 14." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished day 14." />
+    <MESSAGE value="Moved maxdistance to local variable." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved maxdistance to local variable." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

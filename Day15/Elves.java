@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 public class Elves {
+
     public static void main(String[] args) throws IOException {
         if (args.length == 0 || !args[0].matches("^\\d+$")) {
             args = new String[]{"1", "2"};
