@@ -21,10 +21,6 @@ public class Valve implements Comparable<Valve> {
         this.children.add(child);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getNumber() {
         return number;
     }
