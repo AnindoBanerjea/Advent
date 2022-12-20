@@ -7,10 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 16 doesn't work. Need help.">
-      <change beforePath="$PROJECT_DIR$/../Day15/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day15/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Does part 2 in under 40 seconds now.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Valves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Valves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Elves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Elves.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Valves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Valves.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +129,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671449741779</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Day 16 works but is slow.">
+      <created>1671486906826</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671486906826</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Day 16 works but is slow.">
+      <created>1671487842835</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671487842835</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Does part 2 in under 40 seconds now.">
+      <created>1671521852858</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671521852858</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -139,7 +162,9 @@
     <MESSAGE value="Finished day 14" />
     <MESSAGE value="Finished day 14." />
     <MESSAGE value="Day 16 doesn't work. Need help." />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 16 doesn't work. Need help." />
+    <MESSAGE value="Day 16 works but is slow." />
+    <MESSAGE value="Does part 2 in under 40 seconds now." />
+    <option name="LAST_COMMIT_MESSAGE" value="Does part 2 in under 40 seconds now." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -148,21 +173,6 @@
           <properties class="java.lang.StackOverflowError" package="java.lang" />
           <option name="timeStamp" value="12" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Valves.java</url>
-          <line>419</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Valves.java</url>
-          <line>330</line>
-          <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Valves.java</url>
-          <line>261</line>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

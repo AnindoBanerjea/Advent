@@ -61,41 +61,34 @@ public class Valves {
         next = new int[valves.size()][valves.size()];
         allShortestPaths();
     }
-    public List<Valve> stillReachableUnvisited(List<Valve> visited, Set<Valve> target, Valve current, int remainingTime) {
+    public List<Valve> stillReachable(Set<Valve> target, Valve current, int remainingTime) {
         List<Valve> toVisit = new LinkedList<>(target);
-        toVisit.removeAll(visited);
-        List<Valve> tooFarValves = new LinkedList<>();
-        for (Valve dest : toVisit) {
-            if (dist[current.getNumber()][dest.getNumber()] >= remainingTime) {
-                tooFarValves.add(dest);
-            }
-        }
-        toVisit.removeAll(tooFarValves);
+        toVisit.removeIf(dest -> dist[current.getNumber()][dest.getNumber()] >= remainingTime);
         return toVisit;
     }
 
     public int maximizePressure() {
         int maxPressure = 0;
         if (part == 1) {
-            return maximizePressure(new LinkedList<>(), new HashSet<>(nzv), valves.get("AA"), 30, 0);
+            return maximizePressure(new HashSet<>(nzv), valves.get("AA"), 30, 0);
         } else {
             Set<Set<Valve>> pset = Sets.powerSet(new HashSet<>(nzv));
             for (Set<Valve> mine : pset) {
                 Set<Valve> elephants = new HashSet<>(nzv);
                 elephants.removeAll(mine);
-                int pressure =  maximizePressure(new LinkedList<>(), mine, valves.get("AA"), 26, 0) +
-                                maximizePressure(new LinkedList<>(), elephants, valves.get("AA"), 26, 0);
+                int pressure =  maximizePressure(mine, valves.get("AA"), 26, 0) +
+                                maximizePressure(elephants, valves.get("AA"), 26, 0);
                 maxPressure = Math.max(maxPressure, pressure);
             }
         }
         return maxPressure;
     }
 
-    public int maximizePressure(List<Valve> visited, Set<Valve> target, Valve current, int remainingTime, int maxPressure) {
+    public int maximizePressure(Set<Valve> targets, Valve current, int remainingTime, int maxPressure) {
         int maxSoFar = maxPressure;
 
        // Compute list of still reachable unvisited nodes
-        List<Valve> reachable = stillReachableUnvisited(visited, target, current, remainingTime);
+        List<Valve> reachable = stillReachable(targets, current, remainingTime);
 
         // if empty return max pressure
         if (reachable.isEmpty()) {
@@ -103,16 +96,16 @@ public class Valves {
         }
 
         // else iterate over remaining reachable nodes
-        for (Valve nextTarget : reachable) {
-            int distance = dist[current.getNumber()][nextTarget.getNumber()];
+        for (Valve next : reachable) {
+            int distance = dist[current.getNumber()][next.getNumber()];
             int newRemainingTime = remainingTime - distance - 1;
-            int newMaxPressure = maxPressure + nextTarget.getRate() * newRemainingTime;
-            List<Valve> newVisited = new LinkedList<>(visited);
-            newVisited.add(nextTarget);
+            int newMaxPressure = maxPressure + next.getRate() * newRemainingTime;
+            Set<Valve> newTargets = new HashSet<>(targets);
+            newTargets.remove(next);
 
             // call maximize pressure recursively
             maxSoFar = Math.max(maxSoFar,
-                    maximizePressure(newVisited, target, nextTarget, newRemainingTime, newMaxPressure));
+                    maximizePressure(newTargets, next, newRemainingTime, newMaxPressure));
         }
         return maxSoFar;
     }
