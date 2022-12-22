@@ -16,17 +16,11 @@ public class Cubes {
     public Cubes(String filename, int part, boolean verbose) throws IOException {
         this.verbose = verbose;
         this.part = part;
-        cubes = new HashSet<>();
-        List<String> lines = Files.readAllLines(Paths.get(filename));
-        for (String line : lines) {
-            String[] cube = line.split(",");
-            assert cube.length == 3;
-            cubes.add(new int[] {
-                    Integer.parseInt(cube[0]),
-                    Integer.parseInt(cube[1]),
-                    Integer.parseInt(cube[2])
-            });
-        }
+        cubes = Files.readAllLines(Paths.get(filename)).
+                stream().
+                map(s -> s.split(",")).
+                map(s -> new int[] {Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2])}).
+                collect(Collectors.toSet());
     }
 
     private boolean adjacent(int[] a, int [] b) {
