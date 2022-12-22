@@ -7,12 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Does part 2 in under 40 seconds now.">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Made it slightly simpler.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Valves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Valves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Elves/Elves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Elves.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Elves/Valves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Valves.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Minute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Valve.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Valve.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671521852858</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Made it slightly simpler.">
+      <created>1671555786630</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671555786630</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -164,7 +169,8 @@
     <MESSAGE value="Day 16 doesn't work. Need help." />
     <MESSAGE value="Day 16 works but is slow." />
     <MESSAGE value="Does part 2 in under 40 seconds now." />
-    <option name="LAST_COMMIT_MESSAGE" value="Does part 2 in under 40 seconds now." />
+    <MESSAGE value="Made it slightly simpler." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made it slightly simpler." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
