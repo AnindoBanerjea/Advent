@@ -7,12 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Made it slightly simpler.">
-      <change afterPath="$PROJECT_DIR$/CircularList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Cycle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day16/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day16/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day16/out/production/Elves/Minute.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day16/out/production/Elves/Valve.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day16/out/production/Elves/Valve.class" afterDir="false" />
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 17 works">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Chamber.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chamber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CircularList.java" beforeDir="false" afterPath="$PROJECT_DIR$/CircularList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cycle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Elves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Elves.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +40,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ignore.preview.features.used": "true",
-    "last_opened_file_path": "C:/Users/baner/Advent/lib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/baner/Advent/lib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\baner\Advent\Day15" />
@@ -161,7 +161,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671555786630</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Day 17 works">
+      <created>1671683055105</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671683055106</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Day 17 works">
+      <created>1671683291623</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671683291624</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -176,7 +190,8 @@
     <MESSAGE value="Day 16 works but is slow." />
     <MESSAGE value="Does part 2 in under 40 seconds now." />
     <MESSAGE value="Made it slightly simpler." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made it slightly simpler." />
+    <MESSAGE value="Day 17 works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Day 17 works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

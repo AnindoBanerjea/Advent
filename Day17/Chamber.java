@@ -34,13 +34,11 @@ public class Chamber {
     private static final char pushLeft = '<';
 
     private long removedHeight = 0;
-    private final boolean verbose;
     private final char[] input;
     private final CircularList chamber = new CircularList();
     private final List<Cycle> cycles = new ArrayList<>();
 
-    public Chamber(String filename, boolean verbose) throws IOException {
-        this.verbose = verbose;
+    public Chamber(String filename) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
         // There is only one line, so no looping needed
         input = lines.get(0).toCharArray();
@@ -50,44 +48,27 @@ public class Chamber {
         chamber.add("#######".toCharArray());
     }
 
-    private long cycleTruncate(long iterations, long i, long cycleLength, long deltaHeight) {
-        long remainingIterations = iterations - i;
+    private long cycleTruncate(long iterations, long current, long cycleLength, long deltaHeight) {
+        long remainingIterations = iterations - current;
         long removedCycles = remainingIterations / cycleLength;
         removedHeight = removedCycles * deltaHeight;
         remainingIterations = remainingIterations % cycleLength;
-        long oldIterations = iterations;
-        iterations = i + remainingIterations;
-        log("Shortening iterations from %d to %d and compensating by saving removedHeight of %d\n", oldIterations, iterations, removedHeight);
-        return iterations;
+        return current + remainingIterations;
     }
-    private long cycleDetection(long iterations, long i, long time) {
+    private long cycleDetection(long iterations, long current, long time) {
         // Once you have detected a cycle and shorted the number of iterations, stop cycle detection
         // to avoid doing this twice and confusing things
         long cycleLength = 0;
         if (removedHeight == 0) {
-            if (i % input.length == 0 && time % rocks.size() == 0) {
-                Cycle c = new Cycle(i, time, chamber.size(), convertShapeToString(10));
+            if (current % input.length == 0 && time % rocks.size() == 0) {
+                Cycle c = new Cycle(current, time, chamber.size(), hashShape());
                 cycles.add(c);
                 for (int j = 0; j < cycles.size() - 1; j++) {
-                    if (c.shape().equals(cycles.get(j).shape())) {
+                    if (c.hash() == cycles.get(j).hash()) {
                         if (cycleLength == 0) {
-                            cycleLength = i - cycles.get(j).iteration();
-                        } else {
-                            long secondCycleLength = i - cycles.get(j).iteration();
+                            cycleLength = current - cycles.get(j).iteration();
                             long deltaHeight = c.height() - cycles.get(j).height();
-                            log("\n");
-                            log("Found second matching cycle of length=%d\n", secondCycleLength);
-                            log("First cycle was of length=%d\n", cycleLength);
-                            log("Current cycle iteration=%d time=%d height=%d top=%s\n",
-                                    i, time, chamber.size(), c.shape());
-                            log("Previous cycle iteration=%d time=%d height=%d top=%s\n",
-                                    cycles.get(j).iteration(), cycles.get(j).time(), cycles.get(j).height(), cycles.get(j).shape());
-                            if (secondCycleLength * 2 == cycleLength) {
-                                log("First cycle length is double of second, so confirmed\n");
-                                iterations = cycleTruncate(iterations, i, secondCycleLength, deltaHeight);
-                            } else {
-                                log("First cycle length is not double of second, so keep looking\n");
-                            }
+                            iterations = cycleTruncate(iterations, current, cycleLength, deltaHeight);
                         }
                     }
                 }
@@ -120,7 +101,7 @@ public class Chamber {
                     if (test) {
                         // we don't actually move anything, just compute and return if we can
                         // We need to check if hit the chamber walls
-                        // we don't need to check the floor, since we put a floor at zero
+                        // we don't need to check the floor, since we put a rock floor at zero
                         if (    j + dirX >= chamber.get(i).length ||
                                 j + dirX < 0 ||
                                 chamber.get(i + dirY)[j + dirX] == fixedRock) {
@@ -215,24 +196,14 @@ public class Chamber {
 
     }
 
-    public void printTop(int n) {
-        for (int i=0; i<n && i < chamber.size(); i++) {
-            System.out.printf("|%s| %d\n", String.valueOf(chamber.get(chamber.size()-i-1)), chamber.size()-i-1);
-        }
-        System.out.println();
-    }
 
-    public String convertShapeToString(int n) {
+    public int hashShape() {
         StringBuilder output = new StringBuilder();
-        for (int i=0; i<n && i < chamber.size(); i++) {
+        for (int i=0; i<CircularList.ring && i < chamber.size(); i++) {
             output.append(chamber.get(chamber.size()-i-1));
         }
-        return output.toString();
+        return output.toString().hashCode();
     }
-    private void log(String format, Object... args) {
-        if (verbose) System.out.printf(format, args);
-    }
-
     public long getChamberHeight(){
         // -1 because we put a floor of rock
         return chamber.size() -1 + removedHeight;
