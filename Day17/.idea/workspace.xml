@@ -7,12 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Day 17 works">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Some speed up and clean up">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Chamber.java" beforeDir="false" afterPath="$PROJECT_DIR$/Chamber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CircularList.java" beforeDir="false" afterPath="$PROJECT_DIR$/CircularList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cycle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Elves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Chamber.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Chamber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/CircularList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/CircularList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Cycle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Cycle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Elves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Elves.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Elves/Elves.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Elves.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671683291624</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Some speed up and clean up">
+      <created>1671691520172</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1671691520172</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -191,7 +200,8 @@
     <MESSAGE value="Does part 2 in under 40 seconds now." />
     <MESSAGE value="Made it slightly simpler." />
     <MESSAGE value="Day 17 works" />
-    <option name="LAST_COMMIT_MESSAGE" value="Day 17 works" />
+    <MESSAGE value="Some speed up and clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some speed up and clean up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
