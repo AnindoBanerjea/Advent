@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Made it slightly simpler.">
+      <change beforePath="$PROJECT_DIR$/../Day16/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day16/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day16/out/production/Elves/Minute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day16/out/production/Elves/Valve.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Day16/out/production/Elves/Valve.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2InNGVIBFDuLq5PYl4EbvWMcfqH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.preview.features.used": "true",
+    "last_opened_file_path": "C:/Users/baner/Advent/lib/commons-math3-3.6.1-bin/commons-math3-3.6.1/commons-math3-3.6.1.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\baner\Advent\Day15" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Elves" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Elves" />
+      <module name="Elves" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Elves" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Don't understand why this changed." />
+      <created>1670813294175</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670813294175</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Don't understand why this changed.">
+      <created>1670818433058</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670818433058</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Day 12 done. Checking in everything.">
+      <created>1670895728820</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670895728820</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Day 13 done. Checking in everything.">
+      <created>1670974968197</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670974968197</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Move verbose and indent into the object.">
+      <created>1670993332686</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670993332686</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finished day 14.">
+      <created>1671061282586</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671061282586</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finished day 14.">
+      <created>1671174094457</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671174094457</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Day 16 doesn't work. Need help.">
+      <created>1671449741779</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671449741779</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Day 16 works but is slow.">
+      <created>1671486906826</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671486906826</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Day 16 works but is slow.">
+      <created>1671487842835</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671487842835</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Does part 2 in under 40 seconds now.">
+      <created>1671521852858</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671521852858</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Made it slightly simpler.">
+      <created>1671555786630</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671555786630</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed to long and added modulo operator. Day 11 works now." />
+    <MESSAGE value="Don't understand why this changed." />
+    <MESSAGE value="Day 12 done. Checking in everything." />
+    <MESSAGE value="Day 13 done. Checking in everything." />
+    <MESSAGE value="Move verbose and indent into the object." />
+    <MESSAGE value="Finished day 14" />
+    <MESSAGE value="Finished day 14." />
+    <MESSAGE value="Day 16 doesn't work. Need help." />
+    <MESSAGE value="Day 16 works but is slow." />
+    <MESSAGE value="Does part 2 in under 40 seconds now." />
+    <MESSAGE value="Made it slightly simpler." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made it slightly simpler." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StackOverflowError" package="java.lang" />
+          <option name="timeStamp" value="12" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
