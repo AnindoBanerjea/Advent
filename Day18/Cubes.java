@@ -15,8 +15,8 @@ import com.google.common.collect.Sets;
 public class Cubes {
 
 
-    private final Set<Cube> lava;
-    private Set<Cube> steam;
+    private final Set<NCube> lava;
+    private Set<NCube> steam;
 
     private Cube min;
     private Cube max;
@@ -33,16 +33,16 @@ public class Cubes {
     }
 
     private void generateSteam() {
-        Deque<Cube> pending = new ArrayDeque<>();
+        Deque<NCube> pending = new ArrayDeque<>();
         // start from min
         Cube minCopy = new Cube(min);
         pending.add(minCopy);
         steam.add(minCopy);
         while (!pending.isEmpty()) {
-            Cube current = pending.poll();
+            NCube current = pending.poll();
             // steam spreads in all directions
             for (Cube dir : Cube.directions) {
-                Cube next = current.apply(dir);
+                NCube next = current.apply(dir);
                 // unless going outside the box or already lava or already steam
                 if (next.inBox(min, max) && !lava.contains(next) && !steam.contains(next)) {
                     steam.add(next);
@@ -72,8 +72,8 @@ public class Cubes {
     }
 
     private void computeMinMax() {
-        min = lava.stream().reduce(Cube.MAX_VALUE, Cube::min);
-        max = lava.stream().reduce(Cube.MIN_VALUE, Cube::max);
+        min = new Cube(lava.stream().reduce(Cube.MAX_VALUE, NCube::min));
+        max = new Cube(lava.stream().reduce(Cube.MIN_VALUE, NCube::max));
     }
 
     public long countSides() {

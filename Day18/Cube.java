@@ -16,22 +16,9 @@ public class Cube extends NCube {
         super(new int[] {x, y, z});
     }
 
-    public Cube(Cube other) {
+    public Cube(NCube other) {
         super(other);
     }
-
-    public Cube apply(Cube other) {
-        return (Cube) super.apply(other);
-    }
-
-    public Cube min(Cube other) {
-        return (Cube) super.min(other);
-    }
-    public Cube max(Cube other) {
-        return (Cube) super.max(other);
-    }
-
-
 
     public int x() {
         return super.getCoordinates()[0];
