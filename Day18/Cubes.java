@@ -1,12 +1,10 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+Canimport java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import com.google.common.collect.Sets;
 
 
@@ -23,11 +21,10 @@ public class Cubes {
         lava = Files.readAllLines(Paths.get(filename)).
                 stream().
                 map(s -> s.split(",")).
-                map(s -> new Cube(new int[] {
+                map(s -> new Cube(
                         Integer.parseInt(s[0]),
                         Integer.parseInt(s[1]),
-                        Integer.parseInt(s[2])})).
-                collect(Collectors.toSet());
+                        Integer.parseInt(s[2]))).collect(Collectors.toSet());
         computeMinMax();
     }
 
@@ -53,16 +50,14 @@ public class Cubes {
 
     private void convertUnreachableToLava() {
         // convert all unreachable cubes to lava
-        for (int i = min.getCoordinates()[0]; i<=max.getCoordinates()[0]; i++) {
-            for (int j = min.getCoordinates()[1]; j<=max.getCoordinates()[1]; j++) {
-                for (int k = min.getCoordinates()[1]; k<=max.getCoordinates()[2]; k++) {
-                    Cube next = new Cube(new int[]{ i, j, k});
-                    if (!lava.contains(next) && !steam.contains(next)) {
-                        lava.add(next);
-                    }
-                }
-            }
-        }
+        List<Cube> newLava =
+                IntStream.rangeClosed(min.x(), max.x()).boxed().
+                        flatMap(i -> IntStream.rangeClosed(max.y(), max.y()).boxed().
+                                flatMap(j -> IntStream.rangeClosed(min.z(), max.z()).
+                                        mapToObj(k -> new Cube(i, j, k)))).
+                        filter(n -> !lava.contains(n) && !steam.contains(n)).
+                        toList();
+        lava.addAll(newLava);
     }
 
     public long countExternalSides() {
@@ -73,12 +68,8 @@ public class Cubes {
     }
 
     private void computeMinMax() {
-        min = lava.stream().reduce(
-                new Cube(new int [] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE}),
-                Cube::min);
-        max = lava.stream().reduce(
-                new Cube(new int [] {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE}),
-                Cube::max);
+        min = lava.stream().reduce(Cube.MAX_VALUE, Cube::min);
+        max = lava.stream().reduce(Cube.MIN_VALUE, Cube::max);
     }
 
     public long countSides() {
