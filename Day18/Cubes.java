@@ -9,39 +9,92 @@ import com.google.common.collect.Sets;
 
 public class Cubes {
 
-    private final Set<int[]> cubes;
-    private final boolean verbose;
-    private final int part;
 
-    public Cubes(String filename, int part, boolean verbose) throws IOException {
-        this.verbose = verbose;
-        this.part = part;
-        cubes = Files.readAllLines(Paths.get(filename)).
+    private final Set<Cube> lava;
+    private Set<Cube> steam;
+
+    private Cube min;
+    private Cube max;
+
+    public Cubes(String filename) throws IOException {
+        lava = Files.readAllLines(Paths.get(filename)).
                 stream().
                 map(s -> s.split(",")).
-                map(s -> new int[] {Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2])}).
+                map(s -> new Cube(new int[] {
+                        Integer.parseInt(s[0]),
+                        Integer.parseInt(s[1]),
+                        Integer.parseInt(s[2])})).
                 collect(Collectors.toSet());
+        computeMinMax();
     }
 
-    private boolean adjacent(int[] a, int [] b) {
-        // two cubes are adjacent if they are same on two dimensions and off by one on the third
-        int match = 0;
-        int offbyone = 0;
-        for (int dim=0; dim < 3; dim++) {
-            if (a[dim] == b[dim]) {
-                match++;
-            } else if (Math.abs(a[dim]-b[dim]) <= 1) {
-                offbyone++;
+    private void generateSteam() {
+        Deque<Cube> pending = new ArrayDeque<>();
+        // start from min
+        Cube minCopy = new Cube(min);
+        pending.add(minCopy);
+        steam.add(minCopy);
+        while (!pending.isEmpty()) {
+            Cube current = pending.poll();
+            // steam spreads in all directions
+            for (Cube dir : Cube.directions) {
+                Cube next = current.apply(dir);
+                // unless going outside the box or already lava or already steam
+                if (next.inBox(min, max) && !lava.contains(next) && !steam.contains(next)) {
+                    steam.add(next);
+                    pending.add(next);
+                }
             }
         }
-        return (match == 2 && offbyone == 1);
     }
+
+    private void convertUnreachableToLava() {
+        // convert all unreachable cubes to lava
+        for (int i=min.getCoord()[0]; i<=max.getCoord()[0]; i++) {
+            for (int j=min.getCoord()[1]; j<=max.getCoord()[1]; j++) {
+                for (int k=min.getCoord()[1]; k<=max.getCoord()[2]; k++) {
+                    Cube next = new Cube(new int[]{ i, j, k});
+                    if (!lava.contains(next) && !steam.contains(next)) {
+                        lava.add(next);
+                    }
+                }
+            }
+        }
+    }
+
+    public long countExternalSides() {
+        steam = new HashSet<>();
+        generateSteam();
+        convertUnreachableToLava();
+        return countSides();
+    }
+
+    private void computeMinMax() {
+        int[] minCoord = new int[3], maxCoord = new int[3];
+        for (int i=0; i< 3; i++) {
+            final int ii = i;
+            minCoord[ii] = lava.stream().map(s -> s.getCoord()[ii]).min(Integer::compare).orElse(0);
+            // create one unit of extra space for the steam
+            minCoord[ii] -= 1;
+        }
+        for (int i=0; i< 3; i++) {
+            final int ii = i;
+            maxCoord[ii] = lava.stream().map(s -> s.getCoord()[ii]).max(Integer::compare).orElse(0);
+            // create one unit of extra space for the steam
+            maxCoord[ii] += 1;
+        }
+        min = new Cube(minCoord);
+        max = new Cube(maxCoord);
+
+    }
+
     public long countSides() {
         // generate pairs
-         return (long)cubes.size()*6 - 2*Sets.combinations(cubes, 2).
+         return (long) lava.size()*6 - 2*Sets.combinations(lava, 2).
                  stream().
                  map(List::copyOf).
-                 filter(l -> adjacent(l.get(0), l.get(1))).
+                 filter(l -> l.get(0).adjacent(l.get(1))).
                  count();
     }
+
 }
