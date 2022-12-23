@@ -1,9 +1,12 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 import com.google.common.collect.Sets;
 
 
@@ -50,9 +53,9 @@ public class Cubes {
 
     private void convertUnreachableToLava() {
         // convert all unreachable cubes to lava
-        for (int i=min.getCoord()[0]; i<=max.getCoord()[0]; i++) {
-            for (int j=min.getCoord()[1]; j<=max.getCoord()[1]; j++) {
-                for (int k=min.getCoord()[1]; k<=max.getCoord()[2]; k++) {
+        for (int i = min.getCoordinates()[0]; i<=max.getCoordinates()[0]; i++) {
+            for (int j = min.getCoordinates()[1]; j<=max.getCoordinates()[1]; j++) {
+                for (int k = min.getCoordinates()[1]; k<=max.getCoordinates()[2]; k++) {
                     Cube next = new Cube(new int[]{ i, j, k});
                     if (!lava.contains(next) && !steam.contains(next)) {
                         lava.add(next);
@@ -70,31 +73,25 @@ public class Cubes {
     }
 
     private void computeMinMax() {
-        int[] minCoord = new int[3], maxCoord = new int[3];
-        for (int i=0; i< 3; i++) {
-            final int ii = i;
-            minCoord[ii] = lava.stream().map(s -> s.getCoord()[ii]).min(Integer::compare).orElse(0);
-            // create one unit of extra space for the steam
-            minCoord[ii] -= 1;
-        }
-        for (int i=0; i< 3; i++) {
-            final int ii = i;
-            maxCoord[ii] = lava.stream().map(s -> s.getCoord()[ii]).max(Integer::compare).orElse(0);
-            // create one unit of extra space for the steam
-            maxCoord[ii] += 1;
-        }
-        min = new Cube(minCoord);
-        max = new Cube(maxCoord);
-
+        min = lava.stream().reduce(Cube::min).
+                orElse(new Cube(new int [] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE}));
+        max = lava.stream().reduce(Cube::max).
+                orElse(new Cube(new int [] {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE}));
     }
 
     public long countSides() {
-        // generate pairs
-         return (long) lava.size()*6 - 2*Sets.combinations(lava, 2).
-                 stream().
-                 map(List::copyOf).
-                 filter(l -> l.get(0).adjacent(l.get(1))).
-                 count();
+        //  we have 6 * number of cubes sides - 2 * number of cubes that touch along a face
+         return (long) lava.size()*6 - 2*
+                 // generate pairs as sets of two
+                 Sets.combinations(lava, 2).
+                         // turn them into a stream
+                         stream().
+                         // turn the set of two into a list (so we can get to 0 and 1 elements)
+                         map(List::copyOf).
+                         // filter to keep only the pairs that are adjacent
+                         filter(l -> l.get(0).adjacent(l.get(1))).
+                         // count them
+                         count();
     }
 
 }

@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Created a Day00 to copy from">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Works for part 2.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cube.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cubes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cubes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -138,7 +140,28 @@
       <option name="project" value="LOCAL" />
       <updated>1671733383397</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Day 18, part1 works">
+      <created>1671739143635</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671739143635</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Changed file reading to streams.">
+      <created>1671739804914</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671739804914</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Works for part 2.">
+      <created>1671756072405</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671756072405</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -152,6 +175,9 @@
     <MESSAGE value="Moved maxdistance to local variable." />
     <MESSAGE value="Finished Day 15, but forgot to check in." />
     <MESSAGE value="Created a Day00 to copy from" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a Day00 to copy from" />
+    <MESSAGE value="Day 18, part1 works" />
+    <MESSAGE value="Changed file reading to streams." />
+    <MESSAGE value="Works for part 2." />
+    <option name="LAST_COMMIT_MESSAGE" value="Works for part 2." />
   </component>
 </project>
