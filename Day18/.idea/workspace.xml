@@ -7,11 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Works for part 2.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cube.java" afterDir="false" />
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Improved streams code for min/max">
       <change beforePath="$PROJECT_DIR$/Cubes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cubes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671756072405</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Improved streams code for min/max">
+      <created>1671770532481</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671770532481</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -179,6 +183,7 @@
     <MESSAGE value="Day 18, part1 works" />
     <MESSAGE value="Changed file reading to streams." />
     <MESSAGE value="Works for part 2." />
-    <option name="LAST_COMMIT_MESSAGE" value="Works for part 2." />
+    <MESSAGE value="Improved streams code for min/max" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved streams code for min/max" />
   </component>
 </project>

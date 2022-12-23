@@ -73,10 +73,12 @@ public class Cubes {
     }
 
     private void computeMinMax() {
-        min = lava.stream().reduce(Cube::min).
-                orElse(new Cube(new int [] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE}));
-        max = lava.stream().reduce(Cube::max).
-                orElse(new Cube(new int [] {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE}));
+        min = lava.stream().reduce(
+                new Cube(new int [] {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE}),
+                Cube::min);
+        max = lava.stream().reduce(
+                new Cube(new int [] {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE}),
+                Cube::max);
     }
 
     public long countSides() {
