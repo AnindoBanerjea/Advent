@@ -1,5 +1,8 @@
 import java.util.Arrays;
 
+// Generic n-dimensional cube class. Should be able to handle 2d cubes (squares) or 3d cubes or
+// 4d, 5d, 6d cubes
+
 public class NCube {
 
     private final int[] coordinates;
@@ -24,7 +27,6 @@ public class NCube {
     }
 
     public boolean inBox(NCube min, NCube max) {
-        boolean answer1 = true;
         for (int dim=0; dim < coordinates.length; dim++) {
             if (    this.coordinates[dim] < min.coordinates[dim]    ||
                     this.coordinates[dim] > max.coordinates[dim]    ) {
@@ -67,7 +69,11 @@ public class NCube {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null) return false;
+        if (getClass() != o.getClass()) {
+            System.out.printf("This.getClass is %s and o.getClass is %s\n", this.getClass(), o.getClass());
+            return false;
+        }
 
         NCube cube = (NCube) o;
 

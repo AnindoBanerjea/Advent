@@ -7,7 +7,7 @@ public class Elves {
             args = new String[]{"1", "2"};
         }
 
-        String filename = "input.txt";
+        String filename = "test.txt";
 
         for (String arg : args) {
             int part = Integer.parseInt(arg);
