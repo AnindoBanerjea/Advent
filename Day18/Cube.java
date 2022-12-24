@@ -7,6 +7,8 @@ public class Cube extends NCube {
     public static final int dimensions = 3;
     public static final Cube MIN_VALUE = new Cube(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
     public static final Cube MAX_VALUE = new Cube(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
+    public static final Cube MINUS_ONE = new Cube(-1, -1, -1);
+    public static final Cube PLUS_ONE = new Cube(1, 1, 1);
     public static final Cube[] directions = {
             new Cube( 1, 0, 0),
             new Cube(-1, 0, 0),

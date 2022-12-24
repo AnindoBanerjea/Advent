@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do.">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Works again.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cube.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cubes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cubes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Elves.java" beforeDir="false" afterPath="$PROJECT_DIR$/Elves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/NCube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Elves/Elves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Elves/Elves.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671866213415</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Works again.">
+      <created>1671867459131</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1671867459131</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -235,6 +239,7 @@
     <MESSAGE value="Improved streams code for min/max" />
     <MESSAGE value="Looks like I don't understand inheritance." />
     <MESSAGE value="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do." />
+    <MESSAGE value="Works again." />
+    <option name="LAST_COMMIT_MESSAGE" value="Works again." />
   </component>
 </project>

@@ -80,12 +80,12 @@ public class Cubes {
                 new Cube(// Find the smallest number along each dimension x, y and z
                         lava.stream().reduce(Cube.MAX_VALUE, Cube::min).
                                 // subtract 1 along each dimension to give space for steam to expand
-                                apply(new Cube(-1, -1, -1)));
+                                apply(Cube.MINUS_ONE));
         max = // Convert Ncube to cube
                 new Cube(// find the largest number along each dimension
                         lava.stream().reduce(Cube.MIN_VALUE, Cube::max).
                                 // add 1 on each dimension to give space for steam to expand
-                                apply(new Cube(1, 1, 1)));
+                                apply(Cube.PLUS_ONE));
     }
 
     public long countSides() {
