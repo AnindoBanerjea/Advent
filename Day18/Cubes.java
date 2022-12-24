@@ -14,9 +14,11 @@ import com.google.common.collect.Sets;
 
 public class Cubes {
 
-
-    private final Set<NCube> lava;
-    private Set<NCube> steam;
+    // Since we are dealing with 3d cubes here, we are only allowed to call Cube
+    // and not NCube directly. This way, we always get checked to see that dimensions
+    // is 3
+    private final Set<Cube> lava;
+    private Set<Cube> steam;
 
     private Cube min;
     private Cube max;
@@ -29,21 +31,20 @@ public class Cubes {
                         Integer.parseInt(s[0]),
                         Integer.parseInt(s[1]),
                         Integer.parseInt(s[2]))).collect(Collectors.toSet());
-        System.out.printf("Initial lava: %s\n", lava);
         computeMinMax();
     }
 
     private void generateSteam() {
-        Deque<NCube> pending = new ArrayDeque<>();
+        Deque<Cube> pending = new ArrayDeque<>();
         // start from min
         Cube minCopy = new Cube(min);
         pending.add(minCopy);
         steam.add(minCopy);
         while (!pending.isEmpty()) {
-            NCube current = pending.poll();
+            Cube current = pending.poll();
             // steam spreads in all directions
             for (Cube dir : Cube.directions) {
-                NCube next = current.apply(dir);
+                Cube next = current.apply(dir);
                 // unless going outside the box or already lava or already steam
                 if (next.inBox(min, max) &&
                         !lava.contains(next) &&
@@ -53,7 +54,6 @@ public class Cubes {
                 }
             }
         }
-        System.out.printf("Steam: %s\n", steam);
     }
 
     private void convertUnreachableToLava() {
@@ -65,24 +65,7 @@ public class Cubes {
                                         mapToObj(k -> new Cube(i, j, k)))).
                         filter(n -> !lava.contains(n) && !steam.contains(n)).
                         toList();
-        /*
-        List<Cube> newLava = new ArrayList<>();
-        for (int i=min.x(); i<=max.x(); i++) {
-            for (int j=min.y(); j<=max.y(); j++) {
-                for (int k=min.z(); k<=max.z(); k++) {
-                    Cube next = new Cube(i, j, k);
-                    if (!lava.contains(next) && !steam.contains(next)) {
-                        newLava.add(next);
-                    }
-                }
-            }
-        }
-
-         */
-        System.out.printf("New lava: %s\n", newLava);
         lava.addAll(newLava);
-        System.out.printf("Final lava: %s\n", lava);
-
     }
 
     public long countExternalSides() {
@@ -95,16 +78,14 @@ public class Cubes {
     private void computeMinMax() {
         min = // convert NCube to Cube
                 new Cube(// Find the smallest number along each dimension x, y and z
-                        lava.stream().reduce(Cube.MAX_VALUE, NCube::min).
+                        lava.stream().reduce(Cube.MAX_VALUE, Cube::min).
                                 // subtract 1 along each dimension to give space for steam to expand
                                 apply(new Cube(-1, -1, -1)));
         max = // Convert Ncube to cube
                 new Cube(// find the largest number along each dimension
-                        lava.stream().reduce(Cube.MIN_VALUE, NCube::max).
+                        lava.stream().reduce(Cube.MIN_VALUE, Cube::max).
                                 // add 1 on each dimension to give space for steam to expand
                                 apply(new Cube(1, 1, 1)));
-        System.out.println(min);
-        System.out.println(max);
     }
 
     public long countSides() {

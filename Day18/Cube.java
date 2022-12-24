@@ -4,6 +4,7 @@ public class Cube extends NCube {
     // nd cube object, and then adds the 3d constructor, min_value, directions, xyz getters, etc.
     // all objects in Cubes should be of type Cube, to ensure dimensions are always 3.
 
+    public static final int dimensions = 3;
     public static final Cube MIN_VALUE = new Cube(Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE);
     public static final Cube MAX_VALUE = new Cube(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE);
     public static final Cube[] directions = {
@@ -20,9 +21,30 @@ public class Cube extends NCube {
         super(new int[] {x, y, z});
     }
 
-    public Cube(NCube other) {
+    public Cube(Cube other) {
         super(other);
-        assert other.getCoordinates().length == 3;
+        assert other.getCoordinates().length == dimensions;
+    }
+    private Cube(NCube other) {
+        super(other);
+        assert other.getCoordinates().length == dimensions;
+    }
+
+    public Cube apply(Cube other) {
+        assert this.getCoordinates().length == dimensions;
+        assert other.getCoordinates().length == dimensions;
+        return new Cube(super.apply(other));
+    }
+
+    public Cube min (Cube other) {
+        assert this.getCoordinates().length == dimensions;
+        assert other.getCoordinates().length == dimensions;
+        return new Cube(super.min(other));
+    }
+    public Cube max (Cube other) {
+        assert this.getCoordinates().length == dimensions;
+        assert other.getCoordinates().length == dimensions;
+        return new Cube(super.max(other));
     }
 
     public int x() {

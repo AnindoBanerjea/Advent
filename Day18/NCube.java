@@ -69,11 +69,7 @@ public class NCube {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
-        if (getClass() != o.getClass()) {
-            System.out.printf("This.getClass is %s and o.getClass is %s\n", this.getClass(), o.getClass());
-            return false;
-        }
+        if (o == null || getClass() != o.getClass()) return false;
 
         NCube cube = (NCube) o;
 
@@ -87,6 +83,6 @@ public class NCube {
 
     @Override
     public String toString() {
-        return "Cube" + Arrays.toString(coordinates);
+        return "" + coordinates.length + "Cube" + Arrays.toString(coordinates);
     }
 }

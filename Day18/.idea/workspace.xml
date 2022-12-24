@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Looks like I don't understand inheritance.">
+    <list default="true" id="cd22737d-3fa2-42ed-bc59-372a9c041d7e" name="Changes" comment="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cube.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cube.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cubes.java" beforeDir="false" afterPath="$PROJECT_DIR$/Cubes.java" afterDir="false" />
@@ -208,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671829612418</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do.">
+      <created>1671866213415</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1671866213415</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -227,17 +234,7 @@
     <MESSAGE value="Works for part 2." />
     <MESSAGE value="Improved streams code for min/max" />
     <MESSAGE value="Looks like I don't understand inheritance." />
-    <option name="LAST_COMMIT_MESSAGE" value="Looks like I don't understand inheritance." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/NCube.java</url>
-          <line>74</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some printouts to debug the problems and added some comments&#10;to show what I was trying to do." />
   </component>
 </project>
