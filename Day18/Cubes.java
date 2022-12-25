@@ -1,13 +1,10 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import com.google.common.collect.Sets;
 
@@ -26,34 +23,36 @@ public class Cubes {
     public Cubes(String filename) throws IOException {
         lava = Files.readAllLines(Paths.get(filename)).
                 stream().
+                // Stream of lines
                 map(s -> s.split(",")).
+                // Steam of String[]
                 map(s -> new Cube(
                         Integer.parseInt(s[0]),
                         Integer.parseInt(s[1]),
-                        Integer.parseInt(s[2]))).collect(Collectors.toSet());
+                        Integer.parseInt(s[2]))).
+                // Stream of Cube
+                collect(Collectors.toSet());
         computeMinMax();
     }
 
     private void generateSteam() {
         Deque<Cube> pending = new ArrayDeque<>();
         // start from min
-        Cube minCopy = new Cube(min);
-        pending.add(minCopy);
-        steam.add(minCopy);
-        while (!pending.isEmpty()) {
-            Cube current = pending.poll();
-            // steam spreads in all directions
-            for (Cube dir : Cube.directions) {
-                Cube next = current.apply(dir);
-                // unless going outside the box or already lava or already steam
-                if (next.inBox(min, max) &&
-                        !lava.contains(next) &&
-                        !steam.contains(next)) {
-                    steam.add(next);
-                    pending.add(next);
-                }
-            }
-        }
+        pending.add(min);
+        steam.add(min);
+        Stream.generate(pending::poll).
+                takeWhile(Objects::nonNull).
+                // steam spreads in all directions
+                flatMap(current -> Arrays.stream(Cube.directions).
+                        // apply each direction to current
+                        map(current::apply)).
+                        // unless going outside the box or already lava or already steam
+                        filter(next ->next.inBox(min, max) &&
+                                !lava.contains(next) &&
+                                !steam.contains(next)).
+                // Add the cubes that pass the filter to steam, but also to pending to keep the BFS going
+                forEach(next -> {steam.add(next); pending.add(next); });
+
     }
 
     private void convertUnreachableToLava() {
@@ -81,7 +80,7 @@ public class Cubes {
                         lava.stream().reduce(Cube.MAX_VALUE, Cube::min).
                                 // subtract 1 along each dimension to give space for steam to expand
                                 apply(Cube.MINUS_ONE));
-        max = // Convert Ncube to cube
+        max = // Convert NCube to cube
                 new Cube(// find the largest number along each dimension
                         lava.stream().reduce(Cube.MIN_VALUE, Cube::max).
                                 // add 1 on each dimension to give space for steam to expand
